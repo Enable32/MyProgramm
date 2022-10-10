@@ -3,45 +3,45 @@
 @cd/d "%~dp0"
 @setlocal enableextensions enabledelayedexpansion
 
-rem Переменные
+rem РџРµСЂРµРјРµРЅРЅС‹Рµ
 @set edgeupdatem=.
 @set edgeupdate=.
 @set WarpJITSvc=.
-@set "info1=Этот шаг должен длиться не более минуты"
-@set "info2=Если у Вас зависла надпись "ok", то запустите диспетчер задач и завершите вручную процесс Unlocker.exe"
-rem Текущая версия
-@set Thisversion=1.3.0
+@set "info1=Р­С‚РѕС‚ С€Р°Рі РґРѕР»Р¶РµРЅ РґР»РёС‚СЊСЃСЏ РЅРµ Р±РѕР»РµРµ РјРёРЅСѓС‚С‹"
+@set "info2=Р•СЃР»Рё Сѓ Р’Р°СЃ Р·Р°РІРёСЃР»Р° РЅР°РґРїРёСЃСЊ "ok", С‚Рѕ Р·Р°РїСѓСЃС‚РёС‚Рµ РґРёСЃРїРµС‚С‡РµСЂ Р·Р°РґР°С‡ Рё Р·Р°РІРµСЂС€РёС‚Рµ РІСЂСѓС‡РЅСѓСЋ РїСЂРѕС†РµСЃСЃ Unlocker.exe"
+rem РўРµРєСѓС‰Р°СЏ РІРµСЂСЃРёСЏ
+@set Thisversion=1.4.0
 
 
 
 :1
-rem Проверяем интернет-соединение
+rem РџСЂРѕРІРµСЂСЏРµРј РёРЅС‚РµСЂРЅРµС‚-СЃРѕРµРґРёРЅРµРЅРёРµ
 ping www.google.nl -n 1 -w 1000 |>nul find /i "TTL=" && goto CheckUpdate
 
-echo                  Невозможно проверить обновления программы, отсутствует интернет
+echo                  РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёСЏ РїСЂРѕРіСЂР°РјРјС‹, РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РёРЅС‚РµСЂРЅРµС‚
 echo.
-echo    Использование старых версий не рекомендуется, поэтому при первой возможности обновите программу
+echo    РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃС‚Р°СЂС‹С… РІРµСЂСЃРёР№ РЅРµ СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ, РїРѕСЌС‚РѕРјСѓ РїСЂРё РїРµСЂРІРѕР№ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РѕР±РЅРѕРІРёС‚Рµ РїСЂРѕРіСЂР°РјРјСѓ
 pause>nul 
 cls 
 goto MainMenu
-rem Проверка обновлений программы
+rem РџСЂРѕРІРµСЂРєР° РѕР±РЅРѕРІР»РµРЅРёР№ РїСЂРѕРіСЂР°РјРјС‹
 :CheckUpdate
 curl -g -k -L -# -o "%temp%\Version.bat" "https://pastebin.com/raw/udrSrrYN" >nul 2>&1
 call "%temp%\Version.bat"
 if "%Thisversion%" lss "%Version%" (goto Update) else (goto MainMenu)
-rem Обновление программы
+rem РћР±РЅРѕРІР»РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹
 :Update
-echo вы обновитесь
+echo РІС‹ РѕР±РЅРѕРІРёС‚РµСЃСЊ
 pause
-curl -g -k -L -# -o %0 "https://raw.githubusercontent.com/Enable32/MyProgramm/main/FuckMicrosoftEgde" >nul 2>&1
+curl -g -k -L -# -o %0 "https://raw.githubusercontent.com/Enable32/MyProgramm/main/fuckMicrosoftegde.cmd" >nul 2>&1
 call %0
 exit
 
 :MainMenu
 pause
 if not exist "Unlocker.exe" (
-echo Unlocker.exe Не обнаружен рядом с программой!
-echo Пожалуйста положите Unlocker.exe рядом с программой
+echo Unlocker.exe РќРµ РѕР±РЅР°СЂСѓР¶РµРЅ СЂСЏРґРѕРј СЃ РїСЂРѕРіСЂР°РјРјРѕР№!
+echo РџРѕР¶Р°Р»СѓР№СЃС‚Р° РїРѕР»РѕР¶РёС‚Рµ Unlocker.exe СЂСЏРґРѕРј СЃ РїСЂРѕРіСЂР°РјРјРѕР№
 del /q /s "SID.inf" >nul 2>&1 
 pause
 exit
@@ -49,7 +49,7 @@ exit
 powershell whoami | findstr /ic:"nt authority">nul 2>&1  
 if %errorlevel% == 1 (
 @mode con cols=111 lines=40
-call :EchoColor "Произошла ошибка,перезапустите программу" Red & echo.
+call :EchoColor "РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°,РїРµСЂРµР·Р°РїСѓСЃС‚РёС‚Рµ РїСЂРѕРіСЂР°РјРјСѓ" Red & echo.
 del /q /s "SID.inf" >nul 2>&1 
 pause>nul 2>&1 
 exit 
@@ -62,60 +62,60 @@ cls
 set edgeupdatem=.
 set edgeupdate=.
 set WarpJITSvc=.
-echo Пользователь:Система
-echo Имя пользователя который запустил программу: %username%
-echo Сид пользователя который запустил программу: %sidinf%
+echo РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ:РЎРёСЃС‚РµРјР°
+echo РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РєРѕС‚РѕСЂС‹Р№ Р·Р°РїСѓСЃС‚РёР» РїСЂРѕРіСЂР°РјРјСѓ: %username%
+echo РЎРёРґ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РєРѕС‚РѕСЂС‹Р№ Р·Р°РїСѓСЃС‚РёР» РїСЂРѕРіСЂР°РјРјСѓ: %sidinf%
 echo. 
-echo.Для минимальной версии:
+echo.Р”Р»СЏ РјРёРЅРёРјР°Р»СЊРЅРѕР№ РІРµСЂСЃРёРё:
 if not exist "C:\Program Files (x86)\Microsoft\Edge\*" (
-call :EchoColor "Папка Edge удалена из Windows" Green & echo.
+call :EchoColor "РџР°РїРєР° Edge СѓРґР°Р»РµРЅР° РёР· Windows" Green & echo.
 ) else (
-call :EchoColor "Папка Edge не удалена из Windows" Red & echo.
+call :EchoColor "РџР°РїРєР° Edge РЅРµ СѓРґР°Р»РµРЅР° РёР· Windows" Red & echo.
 )
 if not exist "C:\Program Files (x86)\Microsoft\EdgeCore\*" (
-call :EchoColor "Папка EdgeCore удалена из Windows" Green & echo.
+call :EchoColor "РџР°РїРєР° EdgeCore СѓРґР°Р»РµРЅР° РёР· Windows" Green & echo.
 ) else (
-call :EchoColor "Папка EdgeCore не удалена из Windows" Red & echo.
+call :EchoColor "РџР°РїРєР° EdgeCore РЅРµ СѓРґР°Р»РµРЅР° РёР· Windows" Red & echo.
 )
 if not exist "C:\Program Files (x86)\Microsoft\EdgeUpdate\*" (
-call :EchoColor "Папка EdgeUpdate удалена из Windows" Green & echo.
+call :EchoColor "РџР°РїРєР° EdgeUpdate СѓРґР°Р»РµРЅР° РёР· Windows" Green & echo.
 ) else (
-call :EchoColor "Папка EdgeUpdate не удалена из Windows" Red & echo.
+call :EchoColor "РџР°РїРєР° EdgeUpdate РЅРµ СѓРґР°Р»РµРЅР° РёР· Windows" Red & echo.
 )
 if not exist "C:\Program Files (x86)\Microsoft\EdgeWebView\*" (
-call :EchoColor "Папка EdgeWebView удалена из Windows" Green & echo.
+call :EchoColor "РџР°РїРєР° EdgeWebView СѓРґР°Р»РµРЅР° РёР· Windows" Green & echo.
 ) else (
-call :EchoColor "Папка EdgeWebView не удалена из Windows" Red & echo.
+call :EchoColor "РџР°РїРєР° EdgeWebView РЅРµ СѓРґР°Р»РµРЅР° РёР· Windows" Red & echo.
 )
 if not exist "C:\Program Files (x86)\Microsoft\Temp\*" (
-call :EchoColor "Папка EdgeTemp удалена из Windows" Green & echo.
+call :EchoColor "РџР°РїРєР° EdgeTemp СѓРґР°Р»РµРЅР° РёР· Windows" Green & echo.
 ) else (
-call :EchoColor "Папка EdgeTemp не удалена из Windows" Red & echo.
+call :EchoColor "РџР°РїРєР° EdgeTemp РЅРµ СѓРґР°Р»РµРЅР° РёР· Windows" Red & echo.
 )
 echo.
-call :EchoColor "Ярлык edge" 03 & echo.
+call :EchoColor "РЇСЂР»С‹Рє edge" 03 & echo.
 2>nul dir  /b "%userprofile%\desktop\*edge*" | findstr /ic:"Microsoft Edge." >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "Ярлык на рабочем столе найден" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "Ярлык на рабочем столе не найден" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "РЇСЂР»С‹Рє РЅР° СЂР°Р±РѕС‡РµРј СЃС‚РѕР»Рµ РЅР°Р№РґРµРЅ" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "РЇСЂР»С‹Рє РЅР° СЂР°Р±РѕС‡РµРј СЃС‚РѕР»Рµ РЅРµ РЅР°Р№РґРµРЅ" Green & echo.)
 echo.
-call :EchoColor "Состояние служб edge:" 03 & echo.
+call :EchoColor "РЎРѕСЃС‚РѕСЏРЅРёРµ СЃР»СѓР¶Р± edge:" 03 & echo.
 sc query edgeupdatem >nul 2>&1
-if ERRORLEVEL 1 (set edgeupdatem=Green & set edgeupdatem1=Не существует) else (
+if ERRORLEVEL 1 (set edgeupdatem=Green & set edgeupdatem1=РќРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚) else (
 sc query edgeupdatem | find /i "RUNNING" >nul 2>&1
-IF ERRORLEVEL 1 (set edgeupdatem=Red & set edgeupdatem1=Отключена) ELSE (set edgeupdatem=Red & set edgeupdatem1=Запущена))
-call :EchoColor "Служба edgeupdate-%edgeupdatem1%" %edgeupdatem% & echo.
+IF ERRORLEVEL 1 (set edgeupdatem=Red & set edgeupdatem1=РћС‚РєР»СЋС‡РµРЅР°) ELSE (set edgeupdatem=Red & set edgeupdatem1=Р—Р°РїСѓС‰РµРЅР°))
+call :EchoColor "РЎР»СѓР¶Р±Р° edgeupdate-%edgeupdatem1%" %edgeupdatem% & echo.
 
 sc query edgeupdate >nul 2>&1
-if ERRORLEVEL 1 (set edgeupdate=Green & set edgeupdate1=Не существует) else (
+if ERRORLEVEL 1 (set edgeupdate=Green & set edgeupdate1=РќРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚) else (
 sc query edgeupdate | find /i "RUNNING" >nul 2>&1
-IF ERRORLEVEL 1 (set edgeupdate=Red & set edgeupdate1=Отключена) ELSE (set edgeupdate=Red & set edgeupdate1=Запущена))
-call :EchoColor "Служба edgeupdate-%edgeupdate1%" %edgeupdate% & echo.
+IF ERRORLEVEL 1 (set edgeupdate=Red & set edgeupdate1=РћС‚РєР»СЋС‡РµРЅР°) ELSE (set edgeupdate=Red & set edgeupdate1=Р—Р°РїСѓС‰РµРЅР°))
+call :EchoColor "РЎР»СѓР¶Р±Р° edgeupdate-%edgeupdate1%" %edgeupdate% & echo.
 
 sc query WarpJITSvc >nul 2>&1
-if ERRORLEVEL 1 (set WarpJITSvc=Green & set WarpJITSvc1=Не существует) else (
+if ERRORLEVEL 1 (set WarpJITSvc=Green & set WarpJITSvc1=РќРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚) else (
 sc query WarpJITSvc | find /i "RUNNING" >nul 2>&1
-IF ERRORLEVEL 1 (set WarpJITSvc=Red & set WarpJITSvc1=Отключена) ELSE (set WarpJITSvc=Red & set WarpJITSvc1=Запущена))
-call :EchoColor "Служба WarpJITSvc-%WarpJITSvc1%" %WarpJITSvc% & echo.
+IF ERRORLEVEL 1 (set WarpJITSvc=Red & set WarpJITSvc1=РћС‚РєР»СЋС‡РµРЅР°) ELSE (set WarpJITSvc=Red & set WarpJITSvc1=Р—Р°РїСѓС‰РµРЅР°))
+call :EchoColor "РЎР»СѓР¶Р±Р° WarpJITSvc-%WarpJITSvc1%" %WarpJITSvc% & echo.
 
 set "pathedge1=\MicrosoftEdgeUpdateTaskMachineCore"
 set "pathedge2=\MicrosoftEdgeUpdateTaskMachineUA"
@@ -123,55 +123,55 @@ for /f "delims=, tokens=3" %%I in (' 2^>nul SCHTASKS /QUERY /FO CSV /NH /TN "%pa
 for /f "delims=, tokens=3" %%I in (' 2^>nul SCHTASKS /QUERY /FO CSV /NH /TN "%pathedge2%" ') do set "replyTaskDef2=%%~I"
 
 if not "!replyTaskDef1!"=="" (
-	if "!replyTaskDef1!"=="Отключена" ( set "TaskDefResult11=Red" & set "TaskDefResult1=Отключена" ) else ( set "TaskDefResult11=Red" & set "TaskDefResult1=Включена" )
-) else ( set TaskDefResult11=Green & set "TaskDefResult1=Не существует" )
+	if "!replyTaskDef1!"=="РћС‚РєР»СЋС‡РµРЅР°" ( set "TaskDefResult11=Red" & set "TaskDefResult1=РћС‚РєР»СЋС‡РµРЅР°" ) else ( set "TaskDefResult11=Red" & set "TaskDefResult1=Р’РєР»СЋС‡РµРЅР°" )
+) else ( set TaskDefResult11=Green & set "TaskDefResult1=РќРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚" )
 if not "!replyTaskDef2!"=="" (
-	if "!replyTaskDef2!"=="Отключена" ( set "TaskDefResult22=Red" & set "TaskDefResult2=Отключена" ) else ( set "TaskDefResult22=Red" & set "TaskDefResult2=Включена" )
-) else ( set TaskDefResult22=Green & set "TaskDefResult2=Не существует" )
+	if "!replyTaskDef2!"=="РћС‚РєР»СЋС‡РµРЅР°" ( set "TaskDefResult22=Red" & set "TaskDefResult2=РћС‚РєР»СЋС‡РµРЅР°" ) else ( set "TaskDefResult22=Red" & set "TaskDefResult2=Р’РєР»СЋС‡РµРЅР°" )
+) else ( set TaskDefResult22=Green & set "TaskDefResult2=РќРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚" )
 
 echo.
-call :EchoColor "Состояние заданий в планировщике:" 03 & echo.
+call :EchoColor "РЎРѕСЃС‚РѕСЏРЅРёРµ Р·Р°РґР°РЅРёР№ РІ РїР»Р°РЅРёСЂРѕРІС‰РёРєРµ:" 03 & echo.
 call :EchoColor "MicrosoftEdgeUpdateTaskMachineCore- %TaskDefResult1%" %TaskDefResult11% & echo.
 call :EchoColor "MicrosoftEdgeUpdateTaskMachineUA- %TaskDefResult1%" %TaskDefResult11% & echo.
 echo. 
 echo.
-echo.Для максимальной версии(в неё входит и минимальная):
+echo.Р”Р»СЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РІРµСЂСЃРёРё(РІ РЅРµС‘ РІС…РѕРґРёС‚ Рё РјРёРЅРёРјР°Р»СЊРЅР°СЏ):
 2>nul dir  /b "C:\Windows\SystemApps" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке SystemApps ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке SystemApps нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ SystemApps ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ SystemApps РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "C:\Program Files\WindowsApps" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке WindowsApps ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке WindowsApps нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ WindowsApps ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ WindowsApps РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "%userprofile%\appdata\Local\Microsoft\WindowsApps" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке Local\Microsoft\WindowsApps ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке Local\Microsoft\WindowsApps нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ Local\Microsoft\WindowsApps ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ Local\Microsoft\WindowsApps РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "%userprofile%\appdata\Local\Packages" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке Local\Packages ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке Local\Packages нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ Local\Packages ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ Local\Packages РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "C:\ProgramData\Microsoft\Windows\AppRepository\Packages" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке Windows\AppRepository\Packages ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке Windows\AppRepository\Packages нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ Windows\AppRepository\Packages ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ Windows\AppRepository\Packages РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "C:\Windows\WinSxS\Manifests" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке WinSxS\Manifests ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке WinSxS\Manifests нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ WinSxS\Manifests ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ WinSxS\Manifests РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "C:\Windows\WinSxS\FileMaps" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке WinSxS\FileMaps ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке WinSxS\FileMaps нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ WinSxS\FileMaps ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ WinSxS\FileMaps РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "C:\Windows\WinSxS" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке WinSxS ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке WinSxS нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ WinSxS ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ WinSxS РЅРµС‚Сѓ edge" Green & echo.)
 2>nul dir  /b "%userprofile%\appdata\Local\Microsoft" | findstr /ic:"edge" >nul 2>&1 
-if %errorlevel%==0 (call :EchoColor "В папке Local\Microsoft ecть edge" Red & echo.)
-if %errorlevel%==1 (call :EchoColor "В папке Local\Microsoft нету edge" Green & echo.)
+if %errorlevel%==0 (call :EchoColor "Р’ РїР°РїРєРµ Local\Microsoft ecС‚СЊ edge" Red & echo.)
+if %errorlevel%==1 (call :EchoColor "Р’ РїР°РїРєРµ Local\Microsoft РЅРµС‚Сѓ edge" Green & echo.)
 echo. 
 
 
 
-echo Выберите одно из действий:
-echo 1.Режим Минимальный
-echo 2.Режим МАКСИМАЛЬНЫЙ всё что можно найти в системе(Пока не стабильно)
+echo Р’С‹Р±РµСЂРёС‚Рµ РѕРґРЅРѕ РёР· РґРµР№СЃС‚РІРёР№:
+echo 1.Р РµР¶РёРј РњРёРЅРёРјР°Р»СЊРЅС‹Р№
+echo 2.Р РµР¶РёРј РњРђРљРЎРРњРђР›Р¬РќР«Р™ РІСЃС‘ С‡С‚Рѕ РјРѕР¶РЅРѕ РЅР°Р№С‚Рё РІ СЃРёСЃС‚РµРјРµ(РџРѕРєР° РЅРµ СЃС‚Р°Р±РёР»СЊРЅРѕ)
 echo 3.Exit
-choice /c 1234 /n /m "Введите цифру:"
+choice /c 1234 /n /m "Р’РІРµРґРёС‚Рµ С†РёС„СЂСѓ:"
 if errorlevel 4 goto menu
 if errorlevel 3 goto exit
 if errorlevel 2 goto max
@@ -179,12 +179,12 @@ if errorlevel 1 goto min
 exit /b
 :min
 cls
-Echo Выбран режим удаления "Минимальный"
-ECHO. Введите YES , чтобы продолжить:
-ECHO. Введите 2 , чтобы выйти назад
+Echo Р’С‹Р±СЂР°РЅ СЂРµР¶РёРј СѓРґР°Р»РµРЅРёСЏ "РњРёРЅРёРјР°Р»СЊРЅС‹Р№"
+ECHO. Р’РІРµРґРёС‚Рµ YES , С‡С‚РѕР±С‹ РїСЂРѕРґРѕР»Р¶РёС‚СЊ:
+ECHO. Р’РІРµРґРёС‚Рµ 2 , С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РЅР°Р·Р°Рґ
 ECHO. 
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="YES" goto min2
 if /i "%choice%"=="2" goto menu
 goto min
@@ -216,13 +216,13 @@ echo.>"C:\ProgramData\Microsoft\EdgeUpdate"
 echo.>"C:\Users\All Users\Microsoft\EdgeUpdate"
 echo %info1% & echo %info2%
 ping -n 3 127.0.0.1>nul
-echo Удаление заданий в планировщике
+echo РЈРґР°Р»РµРЅРёРµ Р·Р°РґР°РЅРёР№ РІ РїР»Р°РЅРёСЂРѕРІС‰РёРєРµ
 SchTasks /Delete /TN "\MicrosoftEdgeUpdateTaskMachineCore" /F >nul 2>&1 & echo ok
 SchTasks /Delete /TN "\MicrosoftEdgeUpdateTaskMachineUA" /F >nul 2>&1 & echo ok
-echo Задания удалены
+echo Р—Р°РґР°РЅРёСЏ СѓРґР°Р»РµРЅС‹
 echo.
 ping -n 5 127.0.0.1>nul 
-echo Удаление служб
+echo РЈРґР°Р»РµРЅРёРµ СЃР»СѓР¶Р±
 sc delete edgeupdatem >nul 2>&1 & echo ok
 sc delete edgeupdate >nul 2>&1 & echo ok
 sc delete WarpJITSvc >nul 2>&1 & echo ok
@@ -231,13 +231,13 @@ reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdate" /f 
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdatem" /f >nul 2>&1 && echo ok
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WarpJITSvc" /f >nul 2>&1 && echo ok
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService" /f >nul 2>&1 && echo ok
-echo Службы удалены
+echo РЎР»СѓР¶Р±С‹ СѓРґР°Р»РµРЅС‹
 echo.
-echo Отключаем обновления
+echo РћС‚РєР»СЋС‡Р°РµРј РѕР±РЅРѕРІР»РµРЅРёСЏ
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0x0" /f >nul 2>&1 && echo ok
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "SleepingTabsEnabled" /t REG_DWORD /d "0x0" /f >nul 2>&1 && echo ok
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_DWORD /d "0x0" /f >nul 2>&1 && echo ok
-echo Обновления отключены
+echo РћР±РЅРѕРІР»РµРЅРёСЏ РѕС‚РєР»СЋС‡РµРЅС‹
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{29647474-E788-474B-B47A-E1322527A818}" /f >nul 2>&1 && echo ok
 REM Reg.exe add "HKEY_USERS\%sidinf%\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Taskband" /v "Favorites" /t REG_BINARY /d "00a80100003a001f80c827341f105c1042aa032ee45287d668260001002600efbe1200000035f2e4a647cbd8013e5876ed47cbd8016ecd9f0fbdd0d801140056003100000000003955624711005461736b42617200400009000400efbe32554052395562472e000000c5910100000004000000000000000000000000000000926e2e005400610073006b00420061007200000016001601320097010000874f0749200046494c4545587e322e4c4e4b0000840009000400efbe39556247395562472e000000639b00000000020000000000000000005a0000000000589c4400460069006c00650020004500780070006c006f0072006500720020002800320029002e006c006e006b00000040007300680065006c006c00330032002e0064006c006c002c002d003200320030003600370000001c00120000002b00efbe1428a20fbdd0d8011c00420000001d00efbe02004d006900630072006f0073006f00660074002e00570069006e0064006f00770073002e004500780070006c006f0072006500720000001c00220000001e00efbe02005500730065007200500069006e006e006500640000001c000000ff" /f >nul 2>&1 && echo ok
 REM Reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Taskband" /v "Favorites" /t REG_BINARY /d "00a80100003a001f80c827341f105c1042aa032ee45287d668260001002600efbe1200000035f2e4a647cbd8013e5876ed47cbd8016ecd9f0fbdd0d801140056003100000000003955624711005461736b42617200400009000400efbe32554052395562472e000000c5910100000004000000000000000000000000000000926e2e005400610073006b00420061007200000016001601320097010000874f0749200046494c4545587e322e4c4e4b0000840009000400efbe39556247395562472e000000639b00000000020000000000000000005a0000000000589c4400460069006c00650020004500780070006c006f0072006500720020002800320029002e006c006e006b00000040007300680065006c006c00330032002e0064006c006c002c002d003200320030003600370000001c00120000002b00efbe1428a20fbdd0d8011c00420000001d00efbe02004d006900630072006f0073006f00660074002e00570069006e0064006f00770073002e004500780070006c006f0072006500720000001c00220000001e00efbe02005500730065007200500069006e006e006500640000001c000000ff" /f >nul 2>&1 && echo ok
@@ -255,7 +255,7 @@ ping -n 2 127.0.0.1>nul
 start explorer.exe
 cls
 echo.
-Echo.    !Freed!  мегабайт освобождено
+Echo.    !Freed!  РјРµРіР°Р±Р°Р№С‚ РѕСЃРІРѕР±РѕР¶РґРµРЅРѕ
 Echo.
 pause
 pause
@@ -263,29 +263,29 @@ exit
 exit /b
 :max
 cls
-Echo Выбран режим удаления "МАКСИМАЛЬНЫЙ"(Пока не стабильный)
-ECHO. Введите YES , чтобы продолжить:
-ECHO. Введите 2 , чтобы выйти назад
+Echo Р’С‹Р±СЂР°РЅ СЂРµР¶РёРј СѓРґР°Р»РµРЅРёСЏ "РњРђРљРЎРРњРђР›Р¬РќР«Р™"(РџРѕРєР° РЅРµ СЃС‚Р°Р±РёР»СЊРЅС‹Р№)
+ECHO. Р’РІРµРґРёС‚Рµ YES , С‡С‚РѕР±С‹ РїСЂРѕРґРѕР»Р¶РёС‚СЊ:
+ECHO. Р’РІРµРґРёС‚Рµ 2 , С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РЅР°Р·Р°Рґ
 ECHO. 
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="YES" goto max2
 if /i "%choice%"=="2" goto menu
 goto max
 exit /b
 :max2
 cls
-Echo Идёт подсчёт места
+Echo РРґС‘С‚ РїРѕРґСЃС‡С‘С‚ РјРµСЃС‚Р°
 dir /b /s "C:\" | findstr /ic:"edge" >"C:\before.txt"
 cls
-Echo Если вывод информации ок остановится,откройте диспетчер задач, и "удалите" процесс Unlocker.exe
-REM исключения
+Echo Р•СЃР»Рё РІС‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё РѕРє РѕСЃС‚Р°РЅРѕРІРёС‚СЃСЏ,РѕС‚РєСЂРѕР№С‚Рµ РґРёСЃРїРµС‚С‡РµСЂ Р·Р°РґР°С‡, Рё "СѓРґР°Р»РёС‚Рµ" РїСЂРѕС†РµСЃСЃ Unlocker.exe
+REM РёСЃРєР»СЋС‡РµРЅРёСЏ
 set "exceptions=exceptions.ini"
 Echo "C:\Windows\System32\edgehtml.dll">exceptions.ini
 Echo "C:\Windows\System32\edgeIso.dll">>exceptions.ini
 Echo "C:\Windows\System32\EdgeManager.dll">>exceptions.ini
-REM Echo "поставить путь до папки/файла">>exceptions.txt
-REM определение языка и добавление исключения
+REM Echo "РїРѕСЃС‚Р°РІРёС‚СЊ РїСѓС‚СЊ РґРѕ РїР°РїРєРё/С„Р°Р№Р»Р°">>exceptions.txt
+REM РѕРїСЂРµРґРµР»РµРЅРёРµ СЏР·С‹РєР° Рё РґРѕР±Р°РІР»РµРЅРёРµ РёСЃРєР»СЋС‡РµРЅРёСЏ
  for %%l in (ar-SA bg-BG cs-CZ da-DK de-DE el-GR en-GB en-US es-ES es-MX et-EE fi-FI fr-CA fr-FR he-IL hr-HR hu-HU it-IT ja-JP ko-KR lt-LT lv-LV nb-NO nl-NL pl-PL pt-BR pt-PT ro-RO ru-RU sk-SK sl-SI sr-Latn-CS sr-Latn-RS sv-SE th-TH tr-TR uk-UA zh-CN zh-HK zh-TW) do (
 	if exist "%systemroot%\System32\%%l\edgehtml.dll.mui" (
 		Echo "%systemroot%\System32\%%l\edgehtml.dll.mui">>exceptions.ini
@@ -303,8 +303,8 @@ echo ^title kill Unlocker>>%killer%
 echo :1 >>%killer%
 echo ^mode con cols=48 lines=20>>%killer%
 echo cls >>%killer%
-echo echo Нажмите любую кнопку для разблокировки процесса unlocker.exe >>%killer%
-echo echo Как программа начнёт очищать реестр, это окно   можно будет закрыть >>%killer%
+echo echo РќР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєРЅРѕРїРєСѓ РґР»СЏ СЂР°Р·Р±Р»РѕРєРёСЂРѕРІРєРё РїСЂРѕС†РµСЃСЃР° unlocker.exe >>%killer%
+echo echo РљР°Рє РїСЂРѕРіСЂР°РјРјР° РЅР°С‡РЅС‘С‚ РѕС‡РёС‰Р°С‚СЊ СЂРµРµСЃС‚СЂ, СЌС‚Рѕ РѕРєРЅРѕ   РјРѕР¶РЅРѕ Р±СѓРґРµС‚ Р·Р°РєСЂС‹С‚СЊ >>%killer%
 echo pause ^>nul >>%killer%
 echo echo. >>%killer%
 echo echo unlocker killed >>%killer%
@@ -477,21 +477,21 @@ if defined sFreeSize (set sFreeSizePseudoMb1=%sFreeSize:~0,-7%)
 set /a Freed=!sFreeSizePseudoMb1! - !sFreeSizePseudoMb!
 cls
 echo.
-Echo.    !Freed!  мегабайт освобождено
+Echo.    !Freed!  РјРµРіР°Р±Р°Р№С‚ РѕСЃРІРѕР±РѕР¶РґРµРЅРѕ
 Echo.
-Echo Подождите...
+Echo РџРѕРґРѕР¶РґРёС‚Рµ...
 del /q /s "exceptions.ini" >nul 2>&1
 dir /b /s "C:\" | findstr /ic:"edge">"C:\after.txt"
 fc /b "C:\before.txt" "C:\after.txt"  >nul 2>&1
 if %errorlevel%==0 (
 cls
-Echo Скорее всего вы уже применяли этот твик
-Echo Подождите...
+Echo РЎРєРѕСЂРµРµ РІСЃРµРіРѕ РІС‹ СѓР¶Рµ РїСЂРёРјРµРЅСЏР»Рё СЌС‚РѕС‚ С‚РІРёРє
+Echo РџРѕРґРѕР¶РґРёС‚Рµ...
 ping -n 6 127.0.0.1>nul 
 )
 cls
 taskkill.exe /fi "WINDOWTITLE eq Kill Unlocker" /f >nul 2>&1
-Echo Идёт зачистка реестра, нужно просто подождать!
+Echo РРґС‘С‚ Р·Р°С‡РёСЃС‚РєР° СЂРµРµСЃС‚СЂР°, РЅСѓР¶РЅРѕ РїСЂРѕСЃС‚Рѕ РїРѕРґРѕР¶РґР°С‚СЊ!
 echo %info1%
 ping -n 3 127.0.0.1>nul 
 for  /f "delims=" %%i IN ('2^>nul REG QUERY "HKEY_USERS\%sidinf%\SOFTWARE\Classes" /f "*"') DO (
@@ -648,16 +648,16 @@ for /F "usebackq tokens=1" %%a IN (`2^>nul REG QUERY "HKEY_CURRENT_USER\SOFTWARE
 reg delete "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ApplicationAssociationToasts" /v "%%a" /f  >nul 2>&1 && echo ok
 )
 cls
-Echo Реестр очищен
+Echo Р РµРµСЃС‚СЂ РѕС‡РёС‰РµРЅ
 ping -n 5 127.0.0.1>nul 
 cls
-echo Удаление заданий в планировщике
+echo РЈРґР°Р»РµРЅРёРµ Р·Р°РґР°РЅРёР№ РІ РїР»Р°РЅРёСЂРѕРІС‰РёРєРµ
 SchTasks /Delete /TN "\MicrosoftEdgeUpdateTaskMachineCore" /F >nul 2>&1 & echo ok
 SchTasks /Delete /TN "\MicrosoftEdgeUpdateTaskMachineUA" /F >nul 2>&1 & echo ok
-echo Задания удалены
+echo Р—Р°РґР°РЅРёСЏ СѓРґР°Р»РµРЅС‹
 echo.
 ping -n 5 127.0.0.1>nul 
-echo Удаление служб
+echo РЈРґР°Р»РµРЅРёРµ СЃР»СѓР¶Р±
 sc delete edgeupdatem >nul 2>&1 && echo ok
 sc delete edgeupdate >nul 2>&1 && echo ok
 sc delete WarpJITSvc >nul 2>&1 && echo ok
@@ -666,22 +666,22 @@ reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdate" /f 
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdatem" /f >nul 2>&1 && echo ok
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WarpJITSvc" /f >nul 2>&1 && echo ok
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService" /f >nul 2>&1 && echo ok
-echo Службы удалены
+echo РЎР»СѓР¶Р±С‹ СѓРґР°Р»РµРЅС‹
 echo.
 ping -n 5 127.0.0.1>nul 
 echo.
-echo Возвращаем просмотр txt файлов по умолчанию 
+echo Р’РѕР·РІСЂР°С‰Р°РµРј РїСЂРѕСЃРјРѕС‚СЂ txt С„Р°Р№Р»РѕРІ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ 
 Reg.exe add "HKEY_USERS\%sidinf%\SOFTWARE\Microsoft\Windows\CurrentVersion\ApplicationAssociationToasts" /v "Applications\WordPad.exe_.txt" /t REG_DWORD /d "0x0" /f>nul 2>&1 && echo ok
 Reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ApplicationAssociationToasts" /v "Applications\WordPad.exe_.txt" /t REG_DWORD /d "0x0" /f>nul 2>&1 && echo ok
 Reg.exe add "HKEY_USERS\%sidinf%\SOFTWARE\Microsoft\Windows\CurrentVersion\ApplicationAssociationToasts" /v "Applications\notepad.exe_.txt" /t REG_DWORD /d "0x0" /f>nul 2>&1 && echo ok
 Reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ApplicationAssociationToasts" /v "Applications\notepad.exe_.txt" /t REG_DWORD /d "0x0" /f>nul 2>&1 && echo ok
 echo.
-echo Отключаем обновления
+echo РћС‚РєР»СЋС‡Р°РµРј РѕР±РЅРѕРІР»РµРЅРёСЏ
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0x0" /f >nul 2>&1 && echo ok
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "SleepingTabsEnabled" /t REG_DWORD /d "0x0" /f >nul 2>&1 && echo ok
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_DWORD /d "0x0" /f >nul 2>&1 && echo ok
-echo Обновления отключены
-REM Очистка кэша иконок и эскизов 
+echo РћР±РЅРѕРІР»РµРЅРёСЏ РѕС‚РєР»СЋС‡РµРЅС‹
+REM РћС‡РёСЃС‚РєР° РєСЌС€Р° РёРєРѕРЅРѕРє Рё СЌСЃРєРёР·РѕРІ 
 taskkill /im explorer.exe /f>nul 2>&1
 ping -n 2 127.0.0.1>nul
 del /q /a "%userprofile%\AppData\Local\IconCache.db" >nul 2>&1
@@ -692,13 +692,13 @@ ping -n 5 127.0.0.1>nul
 echo.
 echo.
 :Finish
-Echo Удаление Microsoft Edge завершено
-Echo Автор программы:En32
+Echo РЈРґР°Р»РµРЅРёРµ Microsoft Edge Р·Р°РІРµСЂС€РµРЅРѕ
+Echo РђРІС‚РѕСЂ РїСЂРѕРіСЂР°РјРјС‹:En32
 echo.
-echo  Хотите перезагрузить компьютер сейчас?
-echo  1.Да
-echo  2.Нет, выход из программы
-choice /c 12 /n /m "Введите цифру:"
+echo  РҐРѕС‚РёС‚Рµ РїРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ РєРѕРјРїСЊСЋС‚РµСЂ СЃРµР№С‡Р°СЃ?
+echo  1.Р”Р°
+echo  2.РќРµС‚, РІС‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹
+choice /c 12 /n /m "Р’РІРµРґРёС‚Рµ С†РёС„СЂСѓ:"
 if errorlevel 2 exit
 if errorlevel 1 shutdown /r /t 0
 exit /b
