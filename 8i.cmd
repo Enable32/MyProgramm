@@ -1,6 +1,7 @@
 <# :
 @echo off
 @SetLocal EnableExtensions EnableDelayedExpansion
+::'Black;DarkBlue;DarkGreen;DarkCyan;DarkRed;DarkMagenta;DarkYellow;Gray;DarkGray;Blue;Green;Cyan;Red;Magenta;Yellow;White'
 @REM Начальная конфигурация
 @set winup="false"
 @echo "%~n0 %*" | findstr /ic:"winup" > NUL
@@ -15,6 +16,7 @@
 @set don'tusemtkclient=0
 @set adb="%~dp0\files\adb.exe"
 @set logfile=.
+@set "phoneversiondisplay=echo."
 @set fileapk=.
 @set "adbr=."
 @set "namephone=."
@@ -25,7 +27,7 @@
 @%color%
 @%modcon%
 @cd/d "%~dp0"
-@set Thisversion=5.9.8
+@set Thisversion=5.9.9
 5.9.8
 
 :1
@@ -56,6 +58,7 @@ call :EchoColor "                            Вы используете ста�
 call :EchoColor "                                 Актуальная версия - %Version%" Green & echo.
 echo. 
 call :EchoColor "                                       История изменений:" Green & echo. 
+call :EchoColor "5.9.9 Добавил проверку на версию телефона 1776строк" Red & echo.  
 call :EchoColor "5.9.8 Добавлено автообновление и все прилигающие к нему пункты,максимально сжал код 1773строк" Red & echo.  
 call :EchoColor "5.8.2-5.9.7 Добавленна автоустановка драйверов 1349строк" Red & echo.   
 call :EchoColor "4.5.5-5.8.1 Улучшена проверка на mtkclient,удалил просчёт ошибок из-за версии mtkclient" Red & echo.  
@@ -324,7 +327,7 @@ exit/b
 @if /I "%don'tusemtkclient%"=="1" (set "Foldermtk=Отсутствует из-за настроек") else (
 @if /I "%FileName%."=="mtkclient." (Echo.)  else (goto papka)  
 )
-@if /I "%phoneversion%."=="." (echo.)  else (set phoneversiondisplay=Ваша версия телефона: %phoneversion%, если нет введите 202)  
+@if /I "%phoneversion%."=="." (echo.)  else (set "phoneversiondisplay=call :EchoColor "                  Ваша версия телефона: %phoneversion%, если нет введите 202" Green & echo.")  
 @del /s /q ".\files\temp\error.txt"
 CLS
 ECHO                            Несколько полезных советов!!
@@ -341,7 +344,7 @@ Echo                      Скрипт вас вернёт в меню если 
 Echo                         затем отключаем телефон от компа
 Echo                             Автор программы:En32
 Echo                       Папка с mtk: %Foldermtk%
-Echo.                  %phoneversiondisplay%
+%phoneversiondisplay%
 ECHO. ===========================================================================================
 ECHO.              1.Сделать Бэкап (boot,vbmeta и т.д) (mtkclient)
 ECHO.
@@ -375,7 +378,7 @@ if /i "%choice%"=="8" goto dopolnit
 if /i "%choice%"=="999" if /I "%don'tusemtkclient%"=="1" (goto errorsetting) else (del /s /q "%~dp0files\temp\mtkfolder.txt" & goto papka) 
 if /i "%choice%"=="100" goto errorstarts
 if /i "%choice%"=="200" set whomenu=starts & goto versiaproshiwki
-if /i "%choice%"=="202" goto phoneversiondisplay
+if /i "%choice%"=="202" goto errorstarts
 if /i "%choice%"=="0" exit
 GOTO STARTS
 exit /b
