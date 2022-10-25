@@ -58,7 +58,7 @@ echo.
 call :EchoColor "                                       История изменений:" Green & echo. 
 call :EchoColor "  5.9.8 Добавлено автообновление и все прилигающие к нему пункты,максимально сжал код 1773строк" Red & echo.  
 call :EchoColor "            5.8.2-5.9.7 Добавленна автоустановка драйверов 1349строк" Red & echo.   
-call :EchoColor "               4.5.5-5.8.1 Улучшена проверка на mtkclient" Red & echo.   
+call :EchoColor "               4.5.5-5.8.1 Улучшена проверка на mtkclient,удалил просчёт ошибок из-за версии mtkclient" Red & echo.   
 call :EchoColor "                  3.5.3-4.5.4 Добавлен пункт дополнительно" Red & echo.   
 call :EchoColor "                        3.5.2 Добавил просчёт ошибок" Red & echo. 
 call :EchoColor "        2.0.1-3.5.1 добавил установку своих, и сторонних ядер,запуск поверх окон 1286строк" Red & echo. 
@@ -68,8 +68,8 @@ echo.
 call :EchoColor "               Нажмите любую клавишу, чтобы обновить программу" Blue & echo.                   
 del /q /s "%temp%\Version.bat" >nul 2>&1 
 pause>nul
-REM goto update
-curl -g -k -L -# -o %0 "https://github.com/Enable32/MyProgramm/raw/main/8i.cmd" >nul 2>&1 & call %0
+goto update
+curl -g -k -L -# -o %0 "https://github.com/Enable32/MyProgramm/raw/main/8i-Инструменты.cmd" >nul 2>&1 & call %0
 exit
 
 rem Эта настройка нужна только для тех кто не хочет использовать mtkclient
