@@ -27,8 +27,8 @@
 @%color%
 @%modcon%
 @cd/d "%~dp0"
-@set Thisversion=5.9.8
-REM 5.9.8
+@set Thisversion=5.9.9
+REM 5.9.9
 
 :1
 @mode con cols=101 lines=10
@@ -58,7 +58,7 @@ call :EchoColor "                            Вы используете ста�
 call :EchoColor "                                 Актуальная версия - %Version%" Green & echo.
 echo. 
 call :EchoColor "                                       История изменений:" Green & echo. 
-call :EchoColor "5.9.9 Добавил проверку на версию телефона 1776строк" Red & echo.  
+call :EchoColor "5.9.9 Добавил проверку на версию телефона 1783строк" Red & echo.  
 call :EchoColor "5.9.8 Добавлено автообновление и все прилигающие к нему пункты,максимально сжал код 1773строк" Red & echo.  
 call :EchoColor "5.8.2-5.9.7 Добавленна автоустановка драйверов 1349строк" Red & echo.   
 call :EchoColor "4.5.5-5.8.1 Улучшена проверка на mtkclient,удалил просчёт ошибок из-за версии mtkclient" Red & echo.  
@@ -84,6 +84,13 @@ goto STARTS
 :continuation
 @%modcon%
 @%color%
+echo on
+IF EXIST "%~dp0files\temp\phoneversion.txt" (
+for %%a in (a.46 a.21 a.20 a.32) do (
+more "%~dp0files\temp\phoneversion.txt" | findstr /ic:"%%a" >nul 2>&1
+if /i "!errorlevel!"=="0" set "vershionphone%%a=(рекомендуется)"
+set "nocoretext=Если напротив прошивки написано рекомендуется, то это означает что вы уже определяли версию"
+))
 REM Добавил ещё проверку на файлы ядер ну... мне лень объяснять
 IF EXIST ".\files\boot_magisk_a20.img" (set fleshА20=fleshА20 & set c=c) ELSE set viewcoreerror=viewcoreerror & set errorviewcore1=Не найдено ядро a20, & set fleshА20=errorviewcoreerror
 IF EXIST ".\files\boot_magisk_a21.img" (set fleshА21=fleshА21 & set a=a) ELSE set viewcoreerror=viewcoreerror & set errorviewcore2=Не найдено ядро a21, & set fleshА21=errorviewcoreerror
@@ -420,7 +427,7 @@ goto versiaproshiwki1
 set "vershionphone=Ваша версия телефона:"
 for %%a in (a.46 a.21 a.20 a.32) do (
 adb shell getprop ro.build.display.id | findstr /ic:"%%a" >nul 2>&1
-if /i "!errorlevel!"=="0" set vershionphone2=%%a & set "vershionphone%%a=(рекомендуется)" && echo %%a>"%~dp0files\temp\phoneversion.txt" & set phoneversiondisplay=Ваша версия телефона: %phoneversion%, если нет введите 202
+if /i "!errorlevel!"=="0" set vershionphone2=%%a & set "vershionphone%%a=(рекомендуется)" && echo %%a>"%~dp0files\temp\phoneversion.txt"
 )
 set "nocoretext=Если напротив прошивки написано рекомендуется, то это означает что вы уже определяли версию"
 GOTO versiaproshiwki 
@@ -645,7 +652,7 @@ ECHO.          Чтобы узнать как узнать номер проши
 ECHO. %nocoretext%
 ECHO. 
 ECHO. ======================================================================================
-ECHO.                             1.Прошивка А32 %vershionphoneA.32%                     
+ECHO.                             1.Прошивка А32 %vershionphonea.32%                     
 ECHO.                                  
 ECHO.                             2.Прошивка А20 %vershionphoneA.20%  
 ECHO.                                  
