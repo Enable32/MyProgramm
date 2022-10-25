@@ -27,8 +27,8 @@
 @%color%
 @%modcon%
 @cd/d "%~dp0"
-@set Thisversion=5.9.9
-5.9.9
+@set Thisversion=5.9.8
+REM 5.9.8
 
 :1
 @mode con cols=101 lines=10
