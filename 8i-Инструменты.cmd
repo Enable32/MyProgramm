@@ -1,7 +1,7 @@
 <# :
 @echo off
 @SetLocal EnableExtensions EnableDelayedExpansion
-@REM Начальная конфигурация
+@REM РќР°С‡Р°Р»СЊРЅР°СЏ РєРѕРЅС„РёРіСѓСЂР°С†РёСЏ
 @set winup="false"
 @echo "%~n0 %*" | findstr /ic:"winup" > NUL
 @if %errorlevel% EQU 0 powershell -nop -ex Bypass -c "[ScriptBlock]::Create((gc '%~0') -join [Char]10).Invoke()"
@@ -31,15 +31,15 @@
 :1
 @mode con cols=101 lines=10
 @color 07
-REM Проверяем интернет-соединение
+REM РџСЂРѕРІРµСЂСЏРµРј РёРЅС‚РµСЂРЅРµС‚-СЃРѕРµРґРёРЅРµРЅРёРµ
 ping www.google.nl -n 1 -w 100 |>nul find /i "TTL=" && goto CheckUpdate
-call :EchoColor "                  Невозможно проверить обновления программы, отсутствует интернет" Red & echo.     
+call :EchoColor "                  РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёСЏ РїСЂРѕРіСЂР°РјРјС‹, РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РёРЅС‚РµСЂРЅРµС‚" Red & echo.     
 echo.
-call :EchoColor "   Использование старых версий не рекомендуется, поэтому при первой возможности обновите программу" Red & echo.   
+call :EchoColor "   РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃС‚Р°СЂС‹С… РІРµСЂСЃРёР№ РЅРµ СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ, РїРѕСЌС‚РѕРјСѓ РїСЂРё РїРµСЂРІРѕР№ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РѕР±РЅРѕРІРёС‚Рµ РїСЂРѕРіСЂР°РјРјСѓ" Red & echo.   
 echo.
 pause
 goto continuation
-REM Проверка обновлений программы
+REM РџСЂРѕРІРµСЂРєР° РѕР±РЅРѕРІР»РµРЅРёР№ РїСЂРѕРіСЂР°РјРјС‹
 :CheckUpdate
 cls
 @mode con cols=72 lines=10
@@ -47,32 +47,32 @@ curl -g -k -L -# -o "%temp%\Version.bat" "https://pastebin.com/raw/KFtskTJR" >nu
 call "%temp%\Version.bat"
 del /q /s "%temp%\Version.bat" >nul 2>&1 
 if "%Thisversion%" lss "%Version%" (goto Update) else (goto continuation)
-REM Обновление программы
+REM РћР±РЅРѕРІР»РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹
 :Update
 @color 0
 @mode con cols=97 lines=17
 cls
-call :EchoColor "                            Вы используете старую версию - %Thisversion%" red & echo.
-call :EchoColor "                                 Актуальная версия - %Version%" Green & echo.
+call :EchoColor "                            Р’С‹ РёСЃРїРѕР»СЊР·СѓРµС‚Рµ СЃС‚Р°СЂСѓСЋ РІРµСЂСЃРёСЋ - %Thisversion%" red & echo.
+call :EchoColor "                                 РђРєС‚СѓР°Р»СЊРЅР°СЏ РІРµСЂСЃРёСЏ - %Version%" Green & echo.
 echo. 
-call :EchoColor "                                       История изменений:" Green & echo. 
-call :EchoColor "  5.9.8 Добавлено автообновление и все прилигающие к нему пункты,максимально сжал код 1773строк" Red & echo.  
-call :EchoColor "            5.8.2-5.9.7 Добавленна автоустановка драйверов 1349строк" Red & echo.   
-call :EchoColor "               4.5.5-5.8.1 Улучшена проверка на mtkclient" Red & echo.   
-call :EchoColor "                  3.5.3-4.5.4 Добавлен пункт дополнительно" Red & echo.   
-call :EchoColor "                        3.5.2 Добавил просчёт ошибок" Red & echo. 
-call :EchoColor "        2.0.1-3.5.1 добавил установку своих, и сторонних ядер,запуск поверх окон 1286строк" Red & echo. 
-call :EchoColor "                1.0.0-2.0.0 добавил проверку mtkclient(-а) 987строк" Red & echo.   
-call :EchoColor "                     0.0.1 Создание программы 536строк" Red & echo.   
+call :EchoColor "                                       РСЃС‚РѕСЂРёСЏ РёР·РјРµРЅРµРЅРёР№:" Green & echo. 
+call :EchoColor "  5.9.8 Р”РѕР±Р°РІР»РµРЅРѕ Р°РІС‚РѕРѕР±РЅРѕРІР»РµРЅРёРµ Рё РІСЃРµ РїСЂРёР»РёРіР°СЋС‰РёРµ Рє РЅРµРјСѓ РїСѓРЅРєС‚С‹,РјР°РєСЃРёРјР°Р»СЊРЅРѕ СЃР¶Р°Р» РєРѕРґ 1773СЃС‚СЂРѕРє" Red & echo.  
+call :EchoColor "            5.8.2-5.9.7 Р”РѕР±Р°РІР»РµРЅРЅР° Р°РІС‚РѕСѓСЃС‚Р°РЅРѕРІРєР° РґСЂР°Р№РІРµСЂРѕРІ 1349СЃС‚СЂРѕРє" Red & echo.   
+call :EchoColor "               4.5.5-5.8.1 РЈР»СѓС‡С€РµРЅР° РїСЂРѕРІРµСЂРєР° РЅР° mtkclient" Red & echo.   
+call :EchoColor "                  3.5.3-4.5.4 Р”РѕР±Р°РІР»РµРЅ РїСѓРЅРєС‚ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ" Red & echo.   
+call :EchoColor "                        3.5.2 Р”РѕР±Р°РІРёР» РїСЂРѕСЃС‡С‘С‚ РѕС€РёР±РѕРє" Red & echo. 
+call :EchoColor "        2.0.1-3.5.1 РґРѕР±Р°РІРёР» СѓСЃС‚Р°РЅРѕРІРєСѓ СЃРІРѕРёС…, Рё СЃС‚РѕСЂРѕРЅРЅРёС… СЏРґРµСЂ,Р·Р°РїСѓСЃРє РїРѕРІРµСЂС… РѕРєРѕРЅ 1286СЃС‚СЂРѕРє" Red & echo. 
+call :EchoColor "                1.0.0-2.0.0 РґРѕР±Р°РІРёР» РїСЂРѕРІРµСЂРєСѓ mtkclient(-Р°) 987СЃС‚СЂРѕРє" Red & echo.   
+call :EchoColor "                     0.0.1 РЎРѕР·РґР°РЅРёРµ РїСЂРѕРіСЂР°РјРјС‹ 536СЃС‚СЂРѕРє" Red & echo.   
 echo. 
-call :EchoColor "               Нажмите любую клавишу, чтобы обновить программу" Blue & echo.                   
+call :EchoColor "               РќР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ, С‡С‚РѕР±С‹ РѕР±РЅРѕРІРёС‚СЊ РїСЂРѕРіСЂР°РјРјСѓ" Blue & echo.                   
 del /q /s "%temp%\Version.bat" >nul 2>&1 
 pause>nul
 goto update
 curl -g -k -L -# -o %0 "https://github.com/Enable32/MyProgramm/raw/main/fuckMicrosoftegde.cmd" >nul 2>&1 & call %0
 exit
 
-rem Эта настройка нужна только для тех кто не хочет использовать mtkclient
+rem Р­С‚Р° РЅР°СЃС‚СЂРѕР№РєР° РЅСѓР¶РЅР° С‚РѕР»СЊРєРѕ РґР»СЏ С‚РµС… РєС‚Рѕ РЅРµ С…РѕС‡РµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ mtkclient
 FOR /F "usebackq tokens=*" %%a IN (`more "setting.inf" ^| findstr /ic:"set don'tusemtkclient=1"`) DO (
 set don'tusemtkclient=1
 goto STARTS
@@ -81,11 +81,11 @@ goto STARTS
 :continuation
 @%modcon%
 @%color%
-REM Добавил ещё проверку на файлы ядер ну... мне лень объяснять
-IF EXIST ".\files\boot_magisk_a20.img" (set fleshА20=fleshА20 & set c=c) ELSE set viewcoreerror=viewcoreerror & set errorviewcore1=Не найдено ядро a20, & set fleshА20=errorviewcoreerror
-IF EXIST ".\files\boot_magisk_a21.img" (set fleshА21=fleshА21 & set a=a) ELSE set viewcoreerror=viewcoreerror & set errorviewcore2=Не найдено ядро a21, & set fleshА21=errorviewcoreerror
-IF EXIST ".\files\boot_magisk_a32.img" (set fleshА32=fleshА32 & set l=l) ELSE set viewcoreerror=viewcoreerror & set errorviewcore3=Не найдено ядро a32, & set fleshА32=errorviewcoreerror
-IF EXIST ".\files\boot_magisk_a46.img" (set fleshА46=fleshА46 & set l2=l) ELSE set viewcoreerror=viewcoreerror & set errorviewcore4=Не найдено ядро a46. & set fleshА46=errorviewcoreerror
+REM Р”РѕР±Р°РІРёР» РµС‰С‘ РїСЂРѕРІРµСЂРєСѓ РЅР° С„Р°Р№Р»С‹ СЏРґРµСЂ РЅСѓ... РјРЅРµ Р»РµРЅСЊ РѕР±СЉСЏСЃРЅСЏС‚СЊ
+IF EXIST ".\files\boot_magisk_a20.img" (set fleshРђ20=fleshРђ20 & set c=c) ELSE set viewcoreerror=viewcoreerror & set errorviewcore1=РќРµ РЅР°Р№РґРµРЅРѕ СЏРґСЂРѕ a20, & set fleshРђ20=errorviewcoreerror
+IF EXIST ".\files\boot_magisk_a21.img" (set fleshРђ21=fleshРђ21 & set a=a) ELSE set viewcoreerror=viewcoreerror & set errorviewcore2=РќРµ РЅР°Р№РґРµРЅРѕ СЏРґСЂРѕ a21, & set fleshРђ21=errorviewcoreerror
+IF EXIST ".\files\boot_magisk_a32.img" (set fleshРђ32=fleshРђ32 & set l=l) ELSE set viewcoreerror=viewcoreerror & set errorviewcore3=РќРµ РЅР°Р№РґРµРЅРѕ СЏРґСЂРѕ a32, & set fleshРђ32=errorviewcoreerror
+IF EXIST ".\files\boot_magisk_a46.img" (set fleshРђ46=fleshРђ46 & set l2=l) ELSE set viewcoreerror=viewcoreerror & set errorviewcore4=РќРµ РЅР°Р№РґРµРЅРѕ СЏРґСЂРѕ a46. & set fleshРђ46=errorviewcoreerror
 %c%%a%%l%%l2% :settinginisetting
 call :%viewcoreerror%
 goto launch
@@ -116,17 +116,17 @@ ECHO.
 ECHO. ======================================================================================
 Echo.      %errorviewcore1%%errorviewcore2%%errorviewcore3%%errorviewcore4%    
 Echo.                    
-Echo.  Вы можете скачать полную версию и после нажать 1, или можете не скачивать и нажать 2              
+Echo.  Р’С‹ РјРѕР¶РµС‚Рµ СЃРєР°С‡Р°С‚СЊ РїРѕР»РЅСѓСЋ РІРµСЂСЃРёСЋ Рё РїРѕСЃР»Рµ РЅР°Р¶Р°С‚СЊ 1, РёР»Рё РјРѕР¶РµС‚Рµ РЅРµ СЃРєР°С‡РёРІР°С‚СЊ Рё РЅР°Р¶Р°С‚СЊ 2              
 ECHO. ======================================================================================
-ECHO.                 1.Я не буду использовать это ядро(ядра) для моего телефона
-ECHO.                          (Пункт с этим ядром/ядрами будет нерабочим)
-ECHO.                 2.Больше не спрашивать про это ядро
-ECHO.     (будет создан в папке с программой файл setting.inf в нём будет хранится кофиг)
-ECHO.                 3.Выход
+ECHO.                 1.РЇ РЅРµ Р±СѓРґСѓ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЌС‚Рѕ СЏРґСЂРѕ(СЏРґСЂР°) РґР»СЏ РјРѕРµРіРѕ С‚РµР»РµС„РѕРЅР°
+ECHO.                          (РџСѓРЅРєС‚ СЃ СЌС‚РёРј СЏРґСЂРѕРј/СЏРґСЂР°РјРё Р±СѓРґРµС‚ РЅРµСЂР°Р±РѕС‡РёРј)
+ECHO.                 2.Р‘РѕР»СЊС€Рµ РЅРµ СЃРїСЂР°С€РёРІР°С‚СЊ РїСЂРѕ СЌС‚Рѕ СЏРґСЂРѕ
+ECHO.     (Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ РІ РїР°РїРєРµ СЃ РїСЂРѕРіСЂР°РјРјРѕР№ С„Р°Р№Р» setting.inf РІ РЅС‘Рј Р±СѓРґРµС‚ С…СЂР°РЅРёС‚СЃСЏ РєРѕС„РёРі)
+ECHO.                 3.Р’С‹С…РѕРґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto launch
 if /i "%choice%"=="2" goto configsettinginf
 if /i "%choice%"=="3" exit
@@ -167,16 +167,16 @@ cls
 ECHO.
 ECHO. ======================================================================================
 ECHO.        
-ECHO.                         У вас установлен mtkclient?
+ECHO.                         РЈ РІР°СЃ СѓСЃС‚Р°РЅРѕРІР»РµРЅ mtkclient?
 ECHO.                    
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto papka
 if /i "%choice%"=="2" goto launch2.5.5
 cls
@@ -186,16 +186,16 @@ cls
 ECHO.
 ECHO. ======================================================================================
 ECHO.                         
-ECHO.                       Выбирите одно из действий
+ECHO.                       Р’С‹Р±РёСЂРёС‚Рµ РѕРґРЅРѕ РёР· РґРµР№СЃС‚РІРёР№
 ECHO.                    
 ECHO. ======================================================================================
-ECHO.                             1.Скачать сначала драйвера
+ECHO.                             1.РЎРєР°С‡Р°С‚СЊ СЃРЅР°С‡Р°Р»Р° РґСЂР°Р№РІРµСЂР°
 ECHO.                                  
-ECHO.                             2.Скачать и установить mtkclient
+ECHO.                             2.РЎРєР°С‡Р°С‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ mtkclient
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto downloadFile
 if /i "%choice%"=="2" goto next
 cls
@@ -206,16 +206,16 @@ cls
 ECHO.
 ECHO. ======================================================================================
 ECHO. 
-ECHO.          У вас не установлен %python%%Git%%UsbDK%
+ECHO.          РЈ РІР°СЃ РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ %python%%Git%%UsbDK%
 Echo.                     
 ECHO. ======================================================================================
-ECHO.                    1.Я скачал и установил сам (скачала и установила сама) 
+ECHO.                    1.РЇ СЃРєР°С‡Р°Р» Рё СѓСЃС‚Р°РЅРѕРІРёР» СЃР°Рј (СЃРєР°С‡Р°Р»Р° Рё СѓСЃС‚Р°РЅРѕРІРёР»Р° СЃР°РјР°) 
 ECHO.                                  
-ECHO.                    2.Повторить попытку скачивания файла (файлов)
+ECHO.                    2.РџРѕРІС‚РѕСЂРёС‚СЊ РїРѕРїС‹С‚РєСѓ СЃРєР°С‡РёРІР°РЅРёСЏ С„Р°Р№Р»Р° (С„Р°Р№Р»РѕРІ)
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto launch2.5
 if /i "%choice%"=="2" goto downloadFileonlythesefiles
 goto launch2
@@ -239,11 +239,11 @@ call :32Python
 exit /b
 :64Python
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python,)
+powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ python & set errorAll=errorAll & set errornamepython=python,)
 exit /b
 :32Python
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python,)
+powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ python & set errorAll=errorAll & set errornamepython=python,)
 exit /b
 :downloadGit
 if /i %bitdepth%==x64 	(
@@ -254,11 +254,11 @@ call :32Git
 exit /b
 :64Git
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git,)
+powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ Git & set errorAll=errorAll & set errornameGit=Git,)
 exit /b
 :32Git
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git,)
+powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ Git & set errorAll=errorAll & set errornameGit=Git,)
 exit /b
 :downloadUsbDK
 if /i %bitdepth%==x64 	(
@@ -269,11 +269,11 @@ call :32UsbDK
 exit /b
 :64UsbDK
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
+powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
 exit /b
 :32UsbDK
 md "downloadFile" >nul 2>&1	
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
+powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
 exit /b
 :mtkpereizbranie
 for  /f "delims=" %%i IN ('more "%~dp0files\temp\mtkfolder.txt"') DO set Foldermtk=%%i
@@ -286,21 +286,21 @@ goto STARTS
 exit/b
 :papka
 %modcon%
-set "choicefoldersinstall=Выберите папку с установленым mtkclient"
+set "choicefoldersinstall=Р’С‹Р±РµСЂРёС‚Рµ РїР°РїРєСѓ СЃ СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹Рј mtkclient"
 :papka1
 %modcon%
 del /q "%~dp0files\temp\mtkfolder.txt"
 cls
 ECHO %choicefoldersinstall%
-Echo Пример: C:\Users\admin\git\mtkclient
+Echo РџСЂРёРјРµСЂ: C:\Users\admin\git\mtkclient
 
 for /f "usebackq delims=" %%i in (
-    `@"%systemroot%\system32\mshta.exe" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Выберите папку',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
+    `@"%systemroot%\system32\mshta.exe" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Р’С‹Р±РµСЂРёС‚Рµ РїР°РїРєСѓ',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
     1^|more`
 ) do set sFolderName=%%i
 
 if defined sFolderName (
-    echo Выбрана папка: %sFolderName%
+    echo Р’С‹Р±СЂР°РЅР° РїР°РїРєР°: %sFolderName%
 ) else (
     exit
 )
@@ -309,7 +309,7 @@ Echo %sFolderName%>"%~dp0files\temp\mtkfolder.txt"
 goto srawnenie
 exit/b 
 :srawnenie
-if /I "%name%."=="mtkclient." (goto mtkpereizbranie)  else (set "choicefoldersinstall=Выберите правильно папку: mtkclient" & goto papka1)  >nul 2>&1
+if /I "%name%."=="mtkclient." (goto mtkpereizbranie)  else (set "choicefoldersinstall=Р’С‹Р±РµСЂРёС‚Рµ РїСЂР°РІРёР»СЊРЅРѕ РїР°РїРєСѓ: mtkclient" & goto papka1)  >nul 2>&1
 exit/b
 :STARTS
 @echo off
@@ -321,49 +321,49 @@ exit/b
 @for  /f "delims=" %%i IN ('more "%~dp0files\temp\mtkfolder.txt"') DO set Foldermtk=%%i
 @for  /f "delims=" %%i IN ('more "%~dp0files\temp\phoneversion.txt"') DO set phoneversion=%%i
 @For %%f In (%Foldermtk%) Do (Set "FileName=%%~nxf")
-@if /I "%don'tusemtkclient%"=="1" (set "Foldermtk=Отсутствует из-за настроек") else (
+@if /I "%don'tusemtkclient%"=="1" (set "Foldermtk=РћС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РёР·-Р·Р° РЅР°СЃС‚СЂРѕРµРє") else (
 @if /I "%FileName%."=="mtkclient." (Echo.)  else (goto papka)  
 )
-@if /I "%phoneversion%."=="." (echo.)  else (set phoneversiondisplay=Ваша версия телефона: %phoneversion%, если нет введите 202)  
+@if /I "%phoneversion%."=="." (echo.)  else (set phoneversiondisplay=Р’Р°С€Р° РІРµСЂСЃРёСЏ С‚РµР»РµС„РѕРЅР°: %phoneversion%, РµСЃР»Рё РЅРµС‚ РІРІРµРґРёС‚Рµ 202)  
 @del /s /q ".\files\temp\error.txt"
 CLS
-ECHO                            Несколько полезных советов!!
+ECHO                            РќРµСЃРєРѕР»СЊРєРѕ РїРѕР»РµР·РЅС‹С… СЃРѕРІРµС‚РѕРІ!!
 ECHO. ===========================================================================================
-Echo                          (adb)-использование программы adb
-Echo                     (mtkclient)-использование программы mtkclient
-ECHO                          Не забудьте установить драйвера! 
-REM ECHO. Чтобы получить полную справку как пользоваться этой программой впишите 100 и нажмите Enter
-ECHO.                 Чтобы узнать какая у вас версия прошивки введите 200 (adb)
-ECHO.                        Выбираем какой нужен скрипт и запускаем его
-Echo                            Отработка скрипта не видна    
-Echo                         Нужно ждать завершения выполнения
-Echo                      Скрипт вас вернёт в меню если всё будет ок
-Echo                         затем отключаем телефон от компа
-Echo                             Автор программы:En32
-Echo                       Папка с mtk: %Foldermtk%
+Echo                          (adb)-РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РїСЂРѕРіСЂР°РјРјС‹ adb
+Echo                     (mtkclient)-РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РїСЂРѕРіСЂР°РјРјС‹ mtkclient
+ECHO                          РќРµ Р·Р°Р±СѓРґСЊС‚Рµ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РґСЂР°Р№РІРµСЂР°! 
+REM ECHO. Р§С‚РѕР±С‹ РїРѕР»СѓС‡РёС‚СЊ РїРѕР»РЅСѓСЋ СЃРїСЂР°РІРєСѓ РєР°Рє РїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ СЌС‚РѕР№ РїСЂРѕРіСЂР°РјРјРѕР№ РІРїРёС€РёС‚Рµ 100 Рё РЅР°Р¶РјРёС‚Рµ Enter
+ECHO.                 Р§С‚РѕР±С‹ СѓР·РЅР°С‚СЊ РєР°РєР°СЏ Сѓ РІР°СЃ РІРµСЂСЃРёСЏ РїСЂРѕС€РёРІРєРё РІРІРµРґРёС‚Рµ 200 (adb)
+ECHO.                        Р’С‹Р±РёСЂР°РµРј РєР°РєРѕР№ РЅСѓР¶РµРЅ СЃРєСЂРёРїС‚ Рё Р·Р°РїСѓСЃРєР°РµРј РµРіРѕ
+Echo                            РћС‚СЂР°Р±РѕС‚РєР° СЃРєСЂРёРїС‚Р° РЅРµ РІРёРґРЅР°    
+Echo                         РќСѓР¶РЅРѕ Р¶РґР°С‚СЊ Р·Р°РІРµСЂС€РµРЅРёСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ
+Echo                      РЎРєСЂРёРїС‚ РІР°СЃ РІРµСЂРЅС‘С‚ РІ РјРµРЅСЋ РµСЃР»Рё РІСЃС‘ Р±СѓРґРµС‚ РѕРє
+Echo                         Р·Р°С‚РµРј РѕС‚РєР»СЋС‡Р°РµРј С‚РµР»РµС„РѕРЅ РѕС‚ РєРѕРјРїР°
+Echo                             РђРІС‚РѕСЂ РїСЂРѕРіСЂР°РјРјС‹:En32
+Echo                       РџР°РїРєР° СЃ mtk: %Foldermtk%
 Echo.                  %phoneversiondisplay%
 ECHO. ===========================================================================================
-ECHO.              1.Сделать Бэкап (boot,vbmeta и т.д) (mtkclient)
+ECHO.              1.РЎРґРµР»Р°С‚СЊ Р‘СЌРєР°Рї (boot,vbmeta Рё С‚.Рґ) (mtkclient)
 ECHO.
-ECHO.              2.Затиреть метадату и юзердату (mtkclient)
+ECHO.              2.Р—Р°С‚РёСЂРµС‚СЊ РјРµС‚Р°РґР°С‚Сѓ Рё СЋР·РµСЂРґР°С‚Сѓ (mtkclient)
 ECHO.           
-ECHO.              3.Разблокировать загрузчик (mtkclient)
+ECHO.              3.Р Р°Р·Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ Р·Р°РіСЂСѓР·С‡РёРє (mtkclient)
 ECHO.                    
-ECHO.              4.Прошивка Рекавери или Ядра (mtkclient)
+ECHO.              4.РџСЂРѕС€РёРІРєР° Р РµРєР°РІРµСЂРё РёР»Рё РЇРґСЂР° (mtkclient)
 ECHO.                    
-ECHO.              6.Перезагрузка (adb)
+ECHO.              6.РџРµСЂРµР·Р°РіСЂСѓР·РєР° (adb)
 ECHO.                    
-ECHO.              7.Перейти на сайт 4PDA
+ECHO.              7.РџРµСЂРµР№С‚Рё РЅР° СЃР°Р№С‚ 4PDA
 ECHO.
-ECHO.              8.Дополнительно (adb)+(mtkclient)
+ECHO.              8.Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ (adb)+(mtkclient)
 ECHO.
-ECHO.              999.Переизбрать папку mtk
+ECHO.              999.РџРµСЂРµРёР·Р±СЂР°С‚СЊ РїР°РїРєСѓ mtk
 ECHO.
-ECHO.              0.Выход из программы
+ECHO.              0.Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹
 ECHO. ===========================================================================================
 :CHO
 set choice=
-set /p choice= Выберите действие, а затем нажмите Enter:
+set /p choice= Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" if /I "%don'tusemtkclient%"=="1" (goto errorsetting) else (goto damp)
 if /i "%choice%"=="2" if /I "%don'tusemtkclient%"=="1" (goto errorsetting) else (goto deletuserdatametadata)
 if /i "%choice%"=="3" if /I "%don'tusemtkclient%"=="1" (goto errorsetting) else (goto unlockseccfg) 
@@ -385,18 +385,18 @@ exit /b
 :versiaproshiwki
 @cd/d "%~dp0"
 cls
-Echo Зайдите в звонилку набирите *#1234#, в конце вы увидите номер прошивки
-Echo Например у меня RMX3151_11_A.32 и A.32 
-Echo это и есть номер прошивки, он нужен для прошивки ядер от меня
+Echo Р—Р°Р№РґРёС‚Рµ РІ Р·РІРѕРЅРёР»РєСѓ РЅР°Р±РёСЂРёС‚Рµ *#1234#, РІ РєРѕРЅС†Рµ РІС‹ СѓРІРёРґРёС‚Рµ РЅРѕРјРµСЂ РїСЂРѕС€РёРІРєРё
+Echo РќР°РїСЂРёРјРµСЂ Сѓ РјРµРЅСЏ RMX3151_11_A.32 Рё A.32 
+Echo СЌС‚Рѕ Рё РµСЃС‚СЊ РЅРѕРјРµСЂ РїСЂРѕС€РёРІРєРё, РѕРЅ РЅСѓР¶РµРЅ РґР»СЏ РїСЂРѕС€РёРІРєРё СЏРґРµСЂ РѕС‚ РјРµРЅСЏ
 Echo.
 Echo.%vershionphone%%vershionphone2%
 Echo.
-Echo.1)Автоматически показать номер прошивки
-Echo.2)Открыть видео-гайд
-Echo.3)Назад
+Echo.1)РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїРѕРєР°Р·Р°С‚СЊ РЅРѕРјРµСЂ РїСЂРѕС€РёРІРєРё
+Echo.2)РћС‚РєСЂС‹С‚СЊ РІРёРґРµРѕ-РіР°Р№Рґ
+Echo.3)РќР°Р·Р°Рґ
 Echo.
 set choice=
-set /p choice=Ваш выбор:
+set /p choice=Р’Р°С€ РІС‹Р±РѕСЂ:
 if /i "%choice%"=="2" start "" "1https://youtu.be/5VMi5zI--6g" & GOTO %whomenu% 
 if /i "%choice%"=="3" goto %whomenu% 
 if /i "%choice%"=="1" goto versiaproshiwki1
@@ -407,19 +407,19 @@ cls
 cd/d "%~dp0files" 
 adb devices -l | findstr /ic:"RMX3151" >nul 2>&1
 if "%errorlevel%"=="1" (
-call :EchoColor "Не забудьте включить отладку по usb" Green & echo. & echo. & echo. & echo realme 8i не подключён к компьютеру  
+call :EchoColor "РќРµ Р·Р°Р±СѓРґСЊС‚Рµ РІРєР»СЋС‡РёС‚СЊ РѕС‚Р»Р°РґРєСѓ РїРѕ usb" Green & echo. & echo. & echo. & echo realme 8i РЅРµ РїРѕРґРєР»СЋС‡С‘РЅ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ  
 echo. 
-echo Подключите телефон через кабель, программа сама увидит это
+echo РџРѕРґРєР»СЋС‡РёС‚Рµ С‚РµР»РµС„РѕРЅ С‡РµСЂРµР· РєР°Р±РµР»СЊ, РїСЂРѕРіСЂР°РјРјР° СЃР°РјР° СѓРІРёРґРёС‚ СЌС‚Рѕ
 echo. 
 ping -n 4 127.0.0.1>nul 
 goto versiaproshiwki1
 )
-set "vershionphone=Ваша версия телефона:"
+set "vershionphone=Р’Р°С€Р° РІРµСЂСЃРёСЏ С‚РµР»РµС„РѕРЅР°:"
 for %%a in (a.46 a.21 a.20 a.32) do (
 adb shell getprop ro.build.display.id | findstr /ic:"%%a" >nul 2>&1
-if /i "!errorlevel!"=="0" set vershionphone2=%%a & set "vershionphone%%a=(рекомендуется)" && echo %%a>"%~dp0files\temp\phoneversion.txt" & set phoneversiondisplay=Ваша версия телефона: %phoneversion%, если нет введите 202
+if /i "!errorlevel!"=="0" set vershionphone2=%%a & set "vershionphone%%a=(СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ)" && echo %%a>"%~dp0files\temp\phoneversion.txt" & set phoneversiondisplay=Р’Р°С€Р° РІРµСЂСЃРёСЏ С‚РµР»РµС„РѕРЅР°: %phoneversion%, РµСЃР»Рё РЅРµС‚ РІРІРµРґРёС‚Рµ 202
 )
-set "nocoretext=Если напротив прошивки написано рекомендуется, то это означает что вы уже определяли версию"
+set "nocoretext=Р•СЃР»Рё РЅР°РїСЂРѕС‚РёРІ РїСЂРѕС€РёРІРєРё РЅР°РїРёСЃР°РЅРѕ СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ, С‚Рѕ СЌС‚Рѕ РѕР·РЅР°С‡Р°РµС‚ С‡С‚Рѕ РІС‹ СѓР¶Рµ РѕРїСЂРµРґРµР»СЏР»Рё РІРµСЂСЃРёСЋ"
 GOTO versiaproshiwki 
 exit /b
 :damp
@@ -429,19 +429,19 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                            1)Дамп boot.img и vbmeta.img 
-ECHO.                   2)Бэкап ОСОБО ВАЖНЫХ РАЗДЕЛОВ(nvram,nvdata,nvcf)    
+ECHO.                            1)Р”Р°РјРї boot.img Рё vbmeta.img 
+ECHO.                   2)Р‘СЌРєР°Рї РћРЎРћР‘Рћ Р’РђР–РќР«РҐ Р РђР—Р”Р•Р›РћР’(nvram,nvdata,nvcf)    
 ECHO.                         
 ECHO. ======================================================================================
-ECHO.                             1.Дамп boot.img и vbmeta.img
+ECHO.                             1.Р”Р°РјРї boot.img Рё vbmeta.img
 ECHO.                                  
-ECHO.                             2.Бэкап ОСОБО ВАЖНЫХ РАЗДЕЛОВ
+ECHO.                             2.Р‘СЌРєР°Рї РћРЎРћР‘Рћ Р’РђР–РќР«РҐ Р РђР—Р”Р•Р›РћР’
 ECHO.                                  
-ECHO.                             3.Назад
+ECHO.                             3.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto damp1
 if /i "%choice%"=="2" goto damp2
 if /i "%choice%"=="3" goto STARTS
@@ -450,15 +450,15 @@ exit /b
 :damp1
 CLS
 @cd/d "%Foldermtk%"
-Echo Зажмите на выключенном телефоне обе кнопки громкости
-Echo досчитайте до 5 и подключите его к компьютеру
-Echo после подключения досчитайте снова до 5 и отпустите кнопки
-Echo Скрипт вернёт вас в меню если дамп пройдёт удачно
+Echo Р—Р°Р¶РјРёС‚Рµ РЅР° РІС‹РєР»СЋС‡РµРЅРЅРѕРј С‚РµР»РµС„РѕРЅРµ РѕР±Рµ РєРЅРѕРїРєРё РіСЂРѕРјРєРѕСЃС‚Рё
+Echo РґРѕСЃС‡РёС‚Р°Р№С‚Рµ РґРѕ 5 Рё РїРѕРґРєР»СЋС‡РёС‚Рµ РµРіРѕ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ
+Echo РїРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґРѕСЃС‡РёС‚Р°Р№С‚Рµ СЃРЅРѕРІР° РґРѕ 5 Рё РѕС‚РїСѓСЃС‚РёС‚Рµ РєРЅРѕРїРєРё
+Echo РЎРєСЂРёРїС‚ РІРµСЂРЅС‘С‚ РІР°СЃ РІ РјРµРЅСЋ РµСЃР»Рё РґР°РјРї РїСЂРѕР№РґС‘С‚ СѓРґР°С‡РЅРѕ
 del /q /s "boot.img" >nul 2>&1 
 python mtk r boot,vbmeta boot.img,vbmeta.img >nul 2>&1 
 cls
 if not EXIST "boot.img" (goto errorfoldermtk) >nul 2>&1 
-ECHO.	Дамп ядра и vbmeta(ы) будет скопирован из папки mtkclient в папку с программой
+ECHO.	Р”Р°РјРї СЏРґСЂР° Рё vbmeta(С‹) Р±СѓРґРµС‚ СЃРєРѕРїРёСЂРѕРІР°РЅ РёР· РїР°РїРєРё mtkclient РІ РїР°РїРєСѓ СЃ РїСЂРѕРіСЂР°РјРјРѕР№
 md backup >nul 2>&1 
 ping -n 4 127.0.0.1>nul 
 copy "boot.img" "%~dp0backup"
@@ -468,10 +468,10 @@ exit /b
 :damp2
 CLS
 @cd/d "%Foldermtk%"
-Echo Зажмите на выключенном телефоне обе кнопки громкости
-Echo досчитайте до 5 и подключите его к компьютеру
-Echo после подключения досчитайте снова до 5 и отпустите кнопки
-Echo Скрипт вернёт вас в меню если дамп пройдёт удачно
+Echo Р—Р°Р¶РјРёС‚Рµ РЅР° РІС‹РєР»СЋС‡РµРЅРЅРѕРј С‚РµР»РµС„РѕРЅРµ РѕР±Рµ РєРЅРѕРїРєРё РіСЂРѕРјРєРѕСЃС‚Рё
+Echo РґРѕСЃС‡РёС‚Р°Р№С‚Рµ РґРѕ 5 Рё РїРѕРґРєР»СЋС‡РёС‚Рµ РµРіРѕ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ
+Echo РїРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґРѕСЃС‡РёС‚Р°Р№С‚Рµ СЃРЅРѕРІР° РґРѕ 5 Рё РѕС‚РїСѓСЃС‚РёС‚Рµ РєРЅРѕРїРєРё
+Echo РЎРєСЂРёРїС‚ РІРµСЂРЅС‘С‚ РІР°СЃ РІ РјРµРЅСЋ РµСЃР»Рё РґР°РјРї РїСЂРѕР№РґС‘С‚ СѓРґР°С‡РЅРѕ
 del /q /s "nvcfg.img" >nul 2>&1 
 del /q /s "nvdata.img" >nul 2>&1 
 del /q /s "nvram.img" >nul 2>&1 
@@ -480,7 +480,7 @@ if not EXIST "nvcfg.img" (goto errorfoldermtk) >nul 2>&1
 if not EXIST "nvdata.img" (goto errorfoldermtk) >nul 2>&1
 if not EXIST "nvram.img" (goto errorfoldermtk) >nul 2>&1
 cls
-ECHO.	Бэкап будет скопирован из папки mtkclient в папку с программой
+ECHO.	Р‘СЌРєР°Рї Р±СѓРґРµС‚ СЃРєРѕРїРёСЂРѕРІР°РЅ РёР· РїР°РїРєРё mtkclient РІ РїР°РїРєСѓ СЃ РїСЂРѕРіСЂР°РјРјРѕР№
 md backup >nul 2>&1 
 ping -n 4 127.0.0.1>nul 
 FOR /F "usebackq tokens=*" %%a IN (`dir /b * ^|findstr /ic:"nv"`) DO (
@@ -495,16 +495,16 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                    Вы точно хотите затиреть метадату и юзердату?
-ECHO.                         Это сотрёт все данные с телефона!
+ECHO.                    Р’С‹ С‚РѕС‡РЅРѕ С…РѕС‚РёС‚Рµ Р·Р°С‚РёСЂРµС‚СЊ РјРµС‚Р°РґР°С‚Сѓ Рё СЋР·РµСЂРґР°С‚Сѓ?
+ECHO.                         Р­С‚Рѕ СЃРѕС‚СЂС‘С‚ РІСЃРµ РґР°РЅРЅС‹Рµ СЃ С‚РµР»РµС„РѕРЅР°!
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto zateret
 if /i "%choice%"=="2" goto STARTS
 goto deletuserdatametadata
@@ -512,13 +512,13 @@ exit /b
 :zateret
 CLS
 @cd/d "%Foldermtk%"
-Echo Зажмите на выключенном телефоне обе кнопки громкости
-Echo досчитайте до 5 и подключите его к компьютеру
-Echo после подключения досчитайте снова до 5 и отпустите кнопки
-Echo Скрипт вернёт вас в меню если затерание метадаты и юзердаты пройдёт удачно
+Echo Р—Р°Р¶РјРёС‚Рµ РЅР° РІС‹РєР»СЋС‡РµРЅРЅРѕРј С‚РµР»РµС„РѕРЅРµ РѕР±Рµ РєРЅРѕРїРєРё РіСЂРѕРјРєРѕСЃС‚Рё
+Echo РґРѕСЃС‡РёС‚Р°Р№С‚Рµ РґРѕ 5 Рё РїРѕРґРєР»СЋС‡РёС‚Рµ РµРіРѕ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ
+Echo РїРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґРѕСЃС‡РёС‚Р°Р№С‚Рµ СЃРЅРѕРІР° РґРѕ 5 Рё РѕС‚РїСѓСЃС‚РёС‚Рµ РєРЅРѕРїРєРё
+Echo РЎРєСЂРёРїС‚ РІРµСЂРЅС‘С‚ РІР°СЃ РІ РјРµРЅСЋ РµСЃР»Рё Р·Р°С‚РµСЂР°РЅРёРµ РјРµС‚Р°РґР°С‚С‹ Рё СЋР·РµСЂРґР°С‚С‹ РїСЂРѕР№РґС‘С‚ СѓРґР°С‡РЅРѕ
 python mtk e metadata,userdata >"errordeletusermetadata.txt"
 more "%Foldermtk%\errordeletusermetadata.txt" | findstr /ic:"Failed" > NUL
-if %errorlevel% EQU 0 set errorerrorfoldermtk=затирания метадаты и юзердаты & goto errorfoldermtk
+if %errorlevel% EQU 0 set errorerrorfoldermtk=Р·Р°С‚РёСЂР°РЅРёСЏ РјРµС‚Р°РґР°С‚С‹ Рё СЋР·РµСЂРґР°С‚С‹ & goto errorfoldermtk
 del /q "errordeletusermetadata.txt"
 GOTO STARTS 
 exit /b 
@@ -533,14 +533,14 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                   Вам нужно ОБЯЗАТЕЛЬНО сделать дамп boot и vbmeta
+ECHO.                   Р’Р°Рј РЅСѓР¶РЅРѕ РћР‘РЇР—РђРўР•Р›Р¬РќРћ СЃРґРµР»Р°С‚СЊ РґР°РјРї boot Рё vbmeta
 ECHO.  
 ECHO. ======================================================================================
 ECHO.                             1.OK
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto damp
 goto damp
 exit /b
@@ -551,18 +551,18 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                            Что хотите прошить?
+ECHO.                            Р§С‚Рѕ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ?
 ECHO.  
 ECHO. ======================================================================================
-ECHO.                             1.Рекавери
+ECHO.                             1.Р РµРєР°РІРµСЂРё
 ECHO.                                  
-ECHO.                             2.Ядро
+ECHO.                             2.РЇРґСЂРѕ
 ECHO.                                  
-ECHO.                             3.Назад
+ECHO.                             3.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto recovery
 if /i "%choice%"=="2" goto coremagiskB
 if /i "%choice%"=="3" goto STARTS
@@ -577,19 +577,19 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                            Хотите выбрать файл ядра?
-ECHO.       Или вы можете нажать нет и выбрать ядро уже пропатченное magisk-ом
+ECHO.                            РҐРѕС‚РёС‚Рµ РІС‹Р±СЂР°С‚СЊ С„Р°Р№Р» СЏРґСЂР°?
+ECHO.       РР»Рё РІС‹ РјРѕР¶РµС‚Рµ РЅР°Р¶Р°С‚СЊ РЅРµС‚ Рё РІС‹Р±СЂР°С‚СЊ СЏРґСЂРѕ СѓР¶Рµ РїСЂРѕРїР°С‚С‡РµРЅРЅРѕРµ magisk-РѕРј
 ECHO.  
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO.                                  
-ECHO.                             3.Назад
+ECHO.                             3.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto core1
 if /i "%choice%"=="2" goto nocore
 if /i "%choice%"=="3" goto viboor recovery ili coremagiskB
@@ -604,17 +604,17 @@ CLS
 cls
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче ядра ?
-ECHO.           Название ядра точно совпадает с тем что хотите прошить?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЏРґСЂР° ?
+ECHO.           РќР°Р·РІР°РЅРёРµ СЏРґСЂР° С‚РѕС‡РЅРѕ СЃРѕРІРїР°РґР°РµС‚ СЃ С‚РµРј С‡С‚Рѕ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ?
 ECHO.  %wayfilecoremagisk%
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto core2
 if /i "%choice%"=="2" goto coremagiskB
 goto core1.5
@@ -623,13 +623,13 @@ exit /b
 cls
 copy "%wayfilecoremagisk%" "%Foldermtk%"
 @cd/d "%Foldermtk%"
-Echo Зажмите на выключенном телефоне обе кнопки громкости
-Echo досчитайте до 5 и подключите его к компьютеру
-Echo после подключения досчитайте снова до 5 и отпустите кнопки
-Echo Скрипт вернёт вас в меню если прошивка ядра пройдёт удачно
+Echo Р—Р°Р¶РјРёС‚Рµ РЅР° РІС‹РєР»СЋС‡РµРЅРЅРѕРј С‚РµР»РµС„РѕРЅРµ РѕР±Рµ РєРЅРѕРїРєРё РіСЂРѕРјРєРѕСЃС‚Рё
+Echo РґРѕСЃС‡РёС‚Р°Р№С‚Рµ РґРѕ 5 Рё РїРѕРґРєР»СЋС‡РёС‚Рµ РµРіРѕ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ
+Echo РїРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґРѕСЃС‡РёС‚Р°Р№С‚Рµ СЃРЅРѕРІР° РґРѕ 5 Рё РѕС‚РїСѓСЃС‚РёС‚Рµ РєРЅРѕРїРєРё
+Echo РЎРєСЂРёРїС‚ РІРµСЂРЅС‘С‚ РІР°СЃ РІ РјРµРЅСЋ РµСЃР»Рё РїСЂРѕС€РёРІРєР° СЏРґСЂР° РїСЂРѕР№РґС‘С‚ СѓРґР°С‡РЅРѕ
 python mtk w boot,vbmeta "%filecoremagisk%",vbmeta.img.empty >errorcore2.txt
 more "%Foldermtk%\errorcore2.txt" | findstr /ic:"Failed" > NUL
-if %errorlevel% EQU 0 set errorerrorfoldermtk=прошивки ядра & goto errorfoldermtk
+if %errorlevel% EQU 0 set errorerrorfoldermtk=РїСЂРѕС€РёРІРєРё СЏРґСЂР° & goto errorfoldermtk
 GOTO STARTS 
 exit /b 
 :nocore
@@ -637,109 +637,109 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                      Выберите ядро для правильной прошивки
-ECHO.          Чтобы узнать как узнать номер прошивки введите 200 и нажмите Enter
+ECHO.                      Р’С‹Р±РµСЂРёС‚Рµ СЏРґСЂРѕ РґР»СЏ РїСЂР°РІРёР»СЊРЅРѕР№ РїСЂРѕС€РёРІРєРё
+ECHO.          Р§С‚РѕР±С‹ СѓР·РЅР°С‚СЊ РєР°Рє СѓР·РЅР°С‚СЊ РЅРѕРјРµСЂ РїСЂРѕС€РёРІРєРё РІРІРµРґРёС‚Рµ 200 Рё РЅР°Р¶РјРёС‚Рµ Enter
 ECHO. %nocoretext%
 ECHO. 
 ECHO. ======================================================================================
-ECHO.                             1.Прошивка А32 %vershionphoneA.32%                     
+ECHO.                             1.РџСЂРѕС€РёРІРєР° Рђ32 %vershionphoneA.32%                     
 ECHO.                                  
-ECHO.                             2.Прошивка А20 %vershionphoneA.20%  
+ECHO.                             2.РџСЂРѕС€РёРІРєР° Рђ20 %vershionphoneA.20%  
 ECHO.                                  
-ECHO.                             3.Прошивка А21 %vershionphoneA.21%  
+ECHO.                             3.РџСЂРѕС€РёРІРєР° Рђ21 %vershionphoneA.21%  
 ECHO.                                  
-ECHO.                             4.Прошивка А46 %vershionphoneA.46%  
+ECHO.                             4.РџСЂРѕС€РёРІРєР° Рђ46 %vershionphoneA.46%  
 ECHO.                                  
-ECHO.                             9.Назад
+ECHO.                             9.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
-if /i "%choice%"=="1" goto %fleshА32%
-if /i "%choice%"=="2" goto %fleshА20%
-if /i "%choice%"=="3" goto %fleshА21%
-if /i "%choice%"=="4" goto %fleshА46%
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
+if /i "%choice%"=="1" goto %fleshРђ32%
+if /i "%choice%"=="2" goto %fleshРђ20%
+if /i "%choice%"=="3" goto %fleshРђ21%
+if /i "%choice%"=="4" goto %fleshРђ46%
 if /i "%choice%"=="200" set whomenu=nocore & goto versiaproshiwki
 if /i "%choice%"=="9" goto coremagiskB
 goto nocore
 echo.
 exit /b
-:fleshА32
+:fleshРђ32
 set wayfilecoremagisk=%~dp0files\boot_magisk_a32.img
 set filecoremagisk=boot_magisk_a32.img
 CLS
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче ядра ?
-ECHO.                       Вы хотите прошить ядро для А32?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЏРґСЂР° ?
+ECHO.                       Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ СЏРґСЂРѕ РґР»СЏ Рђ32?
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto core2
 if /i "%choice%"=="2" goto nocore
 echo.
 exit /b
-:fleshА20
+:fleshРђ20
 set wayfilecoremagisk=%~dp0files\boot_magisk_a20.img
 set filecoremagisk=boot_magisk_a20.img
 CLS
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче ядра ?
-ECHO.                       Вы хотите прошить ядро для А20?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЏРґСЂР° ?
+ECHO.                       Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ СЏРґСЂРѕ РґР»СЏ Рђ20?
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto core2
 if /i "%choice%"=="2" goto nocore
 echo.
 exit /b
-:fleshА21
+:fleshРђ21
 set wayfilecoremagisk=%~dp0files\boot_magisk_a21.img
 set filecoremagisk=boot_magisk_a21.img
 CLS
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче ядра ?
-ECHO.                       Вы хотите прошить ядро для А21?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЏРґСЂР° ?
+ECHO.                       Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ СЏРґСЂРѕ РґР»СЏ Рђ21?
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto core2
 if /i "%choice%"=="2" goto nocore
 echo.
 exit /b
-:fleshА46
+:fleshРђ46
 set wayfilecoremagisk=%~dp0files\boot_magisk_a46.img
 set filecoremagisk=boot_magisk_a46.img
 CLS
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче ядра ?
-ECHO.                       Вы хотите прошить ядро для А46?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЏРґСЂР° ?
+ECHO.                       Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ СЏРґСЂРѕ РґР»СЏ Рђ46?
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto core2
 if /i "%choice%"=="2" goto nocore
 echo.
@@ -751,17 +751,17 @@ Echo.
 CLS
 ECHO.
 ECHO. ======================================================================================
-ECHO.              Перед разблокировкой загрузчика будут стёрты все данные с телефона 
-ECHO.                  Сохраните их и перенесите на sd-карту чтобы не потерять
-ECHO.                     Вы точно хотите разблокировать загрузчик? 
+ECHO.              РџРµСЂРµРґ СЂР°Р·Р±Р»РѕРєРёСЂРѕРІРєРѕР№ Р·Р°РіСЂСѓР·С‡РёРєР° Р±СѓРґСѓС‚ СЃС‚С‘СЂС‚С‹ РІСЃРµ РґР°РЅРЅС‹Рµ СЃ С‚РµР»РµС„РѕРЅР° 
+ECHO.                  РЎРѕС…СЂР°РЅРёС‚Рµ РёС… Рё РїРµСЂРµРЅРµСЃРёС‚Рµ РЅР° sd-РєР°СЂС‚Сѓ С‡С‚РѕР±С‹ РЅРµ РїРѕС‚РµСЂСЏС‚СЊ
+ECHO.                     Р’С‹ С‚РѕС‡РЅРѕ С…РѕС‚РёС‚Рµ СЂР°Р·Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ Р·Р°РіСЂСѓР·С‡РёРє? 
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto unlock1
 if /i "%choice%"=="2" goto STARTS
 goto unlockseccfg
@@ -770,17 +770,17 @@ exit /b
 :unlock1
 cls
 @cd/d "%Foldermtk%"
-Echo Зажмите на выключенном телефоне обе кнопки громкости
-Echo досчитайте до 5 и подключите его к компьютеру
-Echo после подключения досчитайте снова до 5 и отпустите кнопки
-Echo Скрипт вернёт вас в меню если разблокировка загрузчика пройдёт удачно
+Echo Р—Р°Р¶РјРёС‚Рµ РЅР° РІС‹РєР»СЋС‡РµРЅРЅРѕРј С‚РµР»РµС„РѕРЅРµ РѕР±Рµ РєРЅРѕРїРєРё РіСЂРѕРјРєРѕСЃС‚Рё
+Echo РґРѕСЃС‡РёС‚Р°Р№С‚Рµ РґРѕ 5 Рё РїРѕРґРєР»СЋС‡РёС‚Рµ РµРіРѕ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ
+Echo РїРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґРѕСЃС‡РёС‚Р°Р№С‚Рµ СЃРЅРѕРІР° РґРѕ 5 Рё РѕС‚РїСѓСЃС‚РёС‚Рµ РєРЅРѕРїРєРё
+Echo РЎРєСЂРёРїС‚ РІРµСЂРЅС‘С‚ РІР°СЃ РІ РјРµРЅСЋ РµСЃР»Рё СЂР°Р·Р±Р»РѕРєРёСЂРѕРІРєР° Р·Р°РіСЂСѓР·С‡РёРєР° РїСЂРѕР№РґС‘С‚ СѓРґР°С‡РЅРѕ
 python mtk e metadata,userdata >"errordeletusermetadata.txt"
 more "%Foldermtk%\errordeletusermetadata.txt" | findstr /ic:"Failed" > NUL
-if %errorlevel% EQU 0 set errorerrorfoldermtk=затирания метадаты и юзердаты & goto errorfoldermtk
+if %errorlevel% EQU 0 set errorerrorfoldermtk=Р·Р°С‚РёСЂР°РЅРёСЏ РјРµС‚Р°РґР°С‚С‹ Рё СЋР·РµСЂРґР°С‚С‹ & goto errorfoldermtk
 del /q "errordeletusermetadata.txt"
 python mtk da seccfg unlock >unlock1.txt
 more "%Foldermtk%\unlock1.txt" | findstr /ic:"Failed" > NUL
-if %errorlevel% EQU 0 set errorerrorfoldermtk=разблокировки загрузчика & goto errorfoldermtk
+if %errorlevel% EQU 0 set errorerrorfoldermtk=СЂР°Р·Р±Р»РѕРєРёСЂРѕРІРєРё Р·Р°РіСЂСѓР·С‡РёРєР° & goto errorfoldermtk
 del /q "unlock1.txt"
 GOTO STARTS 
 exit /b 
@@ -801,7 +801,7 @@ call :32
 del .\files\temp\error.txt >nul 2>&1
 cls
 @cd/d "%~dp0downloadFile"
-set NameInf="%~dp0files\Драйвера MTKClient\cdc-acm.inf"
+set NameInf="%~dp0files\Р”СЂР°Р№РІРµСЂР° MTKClient\cdc-acm.inf"
 for  /f "delims= " %%i IN ('dir /b ^| findstr /ic:"python"') DO set python=%%i
 for  /f "delims= " %%i IN ('dir /b ^| findstr /ic:"Git"') DO set Git=%%i
 for  /f "delims= " %%i IN ('dir /b ^| findstr /ic:"UsbDk"') DO set UsbDk=%%i
@@ -811,45 +811,45 @@ echo TITLE driverinstall>>%nameintsalldrive%
 echo @cd/d "%%~dp0">>%nameintsalldrive%
 echo @chcp 1251 ^>nul >>%nameintsalldrive%
 echo SetLocal EnableExtensions EnableDelayedExpansion >>%nameintsalldrive%
-echo set NameInf="%~dp0files\Драйвера MTKClient\cdc-acm.inf" >>%nameintsalldrive%
-echo echo Идёт установка драйверов >>%nameintsalldrive%
+echo set NameInf="%~dp0files\Р”СЂР°Р№РІРµСЂР° MTKClient\cdc-acm.inf" >>%nameintsalldrive%
+echo echo РРґС‘С‚ СѓСЃС‚Р°РЅРѕРІРєР° РґСЂР°Р№РІРµСЂРѕРІ >>%nameintsalldrive%
 echo set python=%%1 >>%nameintsalldrive%
 echo set git=%%2 >>%nameintsalldrive%
 echo set UsbDk=%%3 >>%nameintsalldrive%
 echo "%%python%%" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 >>%nameintsalldrive%
 echo echo.>>%nameintsalldrive%
-echo echo Идёт установка утилит >>%nameintsalldrive%
+echo echo РРґС‘С‚ СѓСЃС‚Р°РЅРѕРІРєР° СѓС‚РёР»РёС‚ >>%nameintsalldrive%
 echo "%%Git%%" /VERYSILENT >>%nameintsalldrive%
-echo rundll32 advpack,LaunchINFSection %%NameInf%%,DefaultInstall,0 ^&^& start "" "%~dp0files\Драйвера MTKClient\install.bat" >>%nameintsalldrive%
+echo rundll32 advpack,LaunchINFSection %%NameInf%%,DefaultInstall,0 ^&^& start "" "%~dp0files\Р”СЂР°Р№РІРµСЂР° MTKClient\install.bat" >>%nameintsalldrive%
 echo start "" "%%UsbDk%%">>%nameintsalldrive%
 echo del "%%~0" ^& exit >>%nameintsalldrive%
 powershell.exe -noprofile "Start-Process '%nameintsalldrive%' '%python%','%Git%','%UsbDk%' -WindowStyle Maximized -Verb RunAs" >nul 2>&1
 if /I "%errorlevel%"=="1" (
-echo Не получилось установить драйвера и утилиты
+echo РќРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РґСЂР°Р№РІРµСЂР° Рё СѓС‚РёР»РёС‚С‹
 echo.
-echo Нажмите любую кнопку чтобы повторить попытку
+echo РќР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєРЅРѕРїРєСѓ С‡С‚РѕР±С‹ РїРѕРІС‚РѕСЂРёС‚СЊ РїРѕРїС‹С‚РєСѓ
 pause>nul
 goto downloadFileinstall
 )
 cls
 :next1
 @cd/d "%~dp0"
-echo Все драйвера и утилиты установлены!
+echo Р’СЃРµ РґСЂР°Р№РІРµСЂР° Рё СѓС‚РёР»РёС‚С‹ СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹!
 echo.
 set choice=
-set /p choice=Введите слово next, чтобы установить mtkclient, или если вы передумали введите back:
+set /p choice=Р’РІРµРґРёС‚Рµ СЃР»РѕРІРѕ next, С‡С‚РѕР±С‹ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ mtkclient, РёР»Рё РµСЃР»Рё РІС‹ РїРµСЂРµРґСѓРјР°Р»Рё РІРІРµРґРёС‚Рµ back:
 if /i "%choice%"=="next" rd /q /s "%~dp0downloadFile" & goto next
 if /i "%choice%"=="back" rd /q /s "%~dp0downloadFile" & goto launch
 goto downloadFileinstall
 :next
 cls
-Echo Выбирите папку куда будет установлен mtkclient
+Echo Р’С‹Р±РёСЂРёС‚Рµ РїР°РїРєСѓ РєСѓРґР° Р±СѓРґРµС‚ СѓСЃС‚Р°РЅРѕРІР»РµРЅ mtkclient
 ping -n 4 127.0.0.1>nul 
 :nextfoldermtkinstall
  cls
- Echo Выберите папку куда будет установлен mtkclient
+ Echo Р’С‹Р±РµСЂРёС‚Рµ РїР°РїРєСѓ РєСѓРґР° Р±СѓРґРµС‚ СѓСЃС‚Р°РЅРѕРІР»РµРЅ mtkclient
 for /f "usebackq delims=" %%i in (
-    `@"%systemroot%\system32\mshta.exe" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Выберите папку куда будет установлен mtkclient',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
+    `@"%systemroot%\system32\mshta.exe" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Р’С‹Р±РµСЂРёС‚Рµ РїР°РїРєСѓ РєСѓРґР° Р±СѓРґРµС‚ СѓСЃС‚Р°РЅРѕРІР»РµРЅ mtkclient',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
     1^|more`
 ) do set mtkinstallfolder=%%i
 if defined mtkinstallfolder (
@@ -860,7 +860,7 @@ if defined mtkinstallfolder (
 cls 
 :nextfoldermtkinstall2
 Echo %mtkinstallfolder%mtkclient
-set /p choice=Правильно ли вы выбрали путь для установки, выбирите yes или no:
+set /p choice=РџСЂР°РІРёР»СЊРЅРѕ Р»Рё РІС‹ РІС‹Р±СЂР°Р»Рё РїСѓС‚СЊ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё, РІС‹Р±РёСЂРёС‚Рµ yes РёР»Рё no:
 if /i "%choice%"=="yes" goto next2
 if /i "%choice%"=="no" goto nextfoldermtkinstall
 cls
@@ -868,13 +868,13 @@ goto nextfoldermtkinstall2
 :next2
 cls
 del /q /s "%~dp0files\temp\mtkfolder.txt" >nul 2>&1
-Echo Идёт скачивание mtkclient подождите немного
+Echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ mtkclient РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ
 set nameinstallmtkclient="installmtkclient.cmd"
 echo @echo off>%nameinstallmtkclient%
 echo @TITLE installmtkclient>>%nameinstallmtkclient%
 echo @cd/d "%%~dp0" >>%nameinstallmtkclient%
 echo @chcp 1251 ^>nul >>%nameinstallmtkclient%
-echo echo Идёт скачивание mtkclient подождите немного >>%nameinstallmtkclient%
+echo echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ mtkclient РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ >>%nameinstallmtkclient%
 echo git clone "1https://github.com/bkerler/mtkclient" "%%1" ^>nul >>%nameinstallmtkclient%
 echo del "%%~0" ^& exit >>%nameinstallmtkclient%
 powershell.exe -noprofile "Start-Process '%nameinstallmtkclient%' '%mtkinstallfolder%mtkclient' -WindowStyle Maximized -Verb RunAs">nul 2>&1
@@ -893,54 +893,54 @@ rd /q /s "%~dp0downloadFile"
 goto mtkpereizbranie
 exit /b 
 :errormtkclient
-ping google.com >nul && (set errors1=Обратитесь к создателю программы для обновления ссылки & set errors2=Либо сами скачайте mtkclient) || (set errors1=У вас отсутствует подключение к интеренету & set errors2=Включите интернет и повторите попытку) >nul 2>&1
+ping google.com >nul && (set errors1=РћР±СЂР°С‚РёС‚РµСЃСЊ Рє СЃРѕР·РґР°С‚РµР»СЋ РїСЂРѕРіСЂР°РјРјС‹ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃСЃС‹Р»РєРё & set errors2=Р›РёР±Рѕ СЃР°РјРё СЃРєР°С‡Р°Р№С‚Рµ mtkclient) || (set errors1=РЈ РІР°СЃ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє РёРЅС‚РµСЂРµРЅРµС‚Сѓ & set errors2=Р’РєР»СЋС‡РёС‚Рµ РёРЅС‚РµСЂРЅРµС‚ Рё РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ) >nul 2>&1
 cls
-Echo.Ошибка скачивания mtkclient
-Echo.Перезапустите программу, если скачивание не получилось, обратитесь к создателю программы для обновления ссылки
+Echo.РћС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ mtkclient
+Echo.РџРµСЂРµР·Р°РїСѓСЃС‚РёС‚Рµ РїСЂРѕРіСЂР°РјРјСѓ, РµСЃР»Рё СЃРєР°С‡РёРІР°РЅРёРµ РЅРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ, РѕР±СЂР°С‚РёС‚РµСЃСЊ Рє СЃРѕР·РґР°С‚РµР»СЋ РїСЂРѕРіСЂР°РјРјС‹ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃСЃС‹Р»РєРё
 Echo.
 Echo.%errors1%
 Echo.%errors2%
 ECHO. ======================================================================================
-Echo.                       Выбирите одно из действий
+Echo.                       Р’С‹Р±РёСЂРёС‚Рµ РѕРґРЅРѕ РёР· РґРµР№СЃС‚РІРёР№
 ECHO. ======================================================================================
-ECHO.                    1.Я скачал сам (скачала сама) 
+ECHO.                    1.РЇ СЃРєР°С‡Р°Р» СЃР°Рј (СЃРєР°С‡Р°Р»Р° СЃР°РјР°) 
 ECHO.                                  
-ECHO.                    2.Повторить попытку скачивания
+ECHO.                    2.РџРѕРІС‚РѕСЂРёС‚СЊ РїРѕРїС‹С‚РєСѓ СЃРєР°С‡РёРІР°РЅРёСЏ
 ECHO. ======================================================================================   
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto papka
 if /i "%choice%"=="2" goto next
 goto errormtkclient
 exit /b
 :64
 cls
-Echo Идёт скачивание python подождите немного
+Echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ python РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ
 @cd/d "%~dp0"
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
 Echo.
-Echo Идёт скачивание GIT подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
+Echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ GIT РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ
+powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
 Echo.
-Echo Идёт скачивание UsbDK подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok   || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
+Echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ UsbDK РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ
+powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok   || (Echo.Error & set errorUsbDk=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
 Echo.
 cls
 call :%errorAll%
 exit /b 
 :32
 cls
-Echo Идёт скачивание python подождите немного
+Echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ python РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ
 @cd/d "%~dp0"
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
 Echo.
-Echo Идёт скачивание GIT подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
+Echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ GIT РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ
+powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
 Echo.
-Echo Идёт скачивание UsbDK подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
+Echo РРґС‘С‚ СЃРєР°С‡РёРІР°РЅРёРµ UsbDK РїРѕРґРѕР¶РґРёС‚Рµ РЅРµРјРЅРѕРіРѕ
+powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=РѕС€РёР±РєР° СЃРєР°С‡РёРІР°РЅРёСЏ UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
 cls
 call :%errorAll%
 exit /b
@@ -948,24 +948,24 @@ exit /b
 Echo %errornamepython%>.\files\temp\error.txt
 Echo %errornameGit%>>.\files\temp\error.txt
 Echo %errornameusbdk% >>.\files\temp\error.txt
-ping google.com >nul && (set errors1=Обратитесь к создателю программы для обновления ссылки & set errors2=Либо сами скачайте и установите: %errornamepython%%errornameGit%%errornameusbdk%) || (set errors1=У вас отсутствует подключение к интеренету & set errors2=Вам нужно установить: %errornamepython%%errornameGit%%errornameusbdk%) >nul 2>&1
+ping google.com >nul && (set errors1=РћР±СЂР°С‚РёС‚РµСЃСЊ Рє СЃРѕР·РґР°С‚РµР»СЋ РїСЂРѕРіСЂР°РјРјС‹ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃСЃС‹Р»РєРё & set errors2=Р›РёР±Рѕ СЃР°РјРё СЃРєР°С‡Р°Р№С‚Рµ Рё СѓСЃС‚Р°РЅРѕРІРёС‚Рµ: %errornamepython%%errornameGit%%errornameusbdk%) || (set errors1=РЈ РІР°СЃ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє РёРЅС‚РµСЂРµРЅРµС‚Сѓ & set errors2=Р’Р°Рј РЅСѓР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ: %errornamepython%%errornameGit%%errornameusbdk%) >nul 2>&1
 cls
 Echo.%errorpython%
 Echo.%errorGit%
 Echo.%errorUsbDk%
 Echo.
-Echo.Разрядность вашей системы: %bitdepth%
+Echo.Р Р°Р·СЂСЏРґРЅРѕСЃС‚СЊ РІР°С€РµР№ СЃРёСЃС‚РµРјС‹: %bitdepth%
 Echo.%errors1%
 Echo.%errors2%
 ECHO. ======================================================================================
-Echo.                       Выбирите одно из действий
+Echo.                       Р’С‹Р±РёСЂРёС‚Рµ РѕРґРЅРѕ РёР· РґРµР№СЃС‚РІРёР№
 ECHO. ======================================================================================
-ECHO.                    1.Я скачал и установил сам (скачала и установила сама) 
+ECHO.                    1.РЇ СЃРєР°С‡Р°Р» Рё СѓСЃС‚Р°РЅРѕРІРёР» СЃР°Рј (СЃРєР°С‡Р°Р»Р° Рё СѓСЃС‚Р°РЅРѕРІРёР»Р° СЃР°РјР°) 
 ECHO.                                  
-ECHO.                    2.Повторить попытку скачивания
+ECHO.                    2.РџРѕРІС‚РѕСЂРёС‚СЊ РїРѕРїС‹С‚РєСѓ СЃРєР°С‡РёРІР°РЅРёСЏ
 ECHO. ======================================================================================
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto next
 if /i "%choice%"=="2" goto downloadFile
 goto errorAll
@@ -973,16 +973,16 @@ exit /b
 
 rem
 ECHO ***************************************************************************************
-ECHO *      ------------------------^< ожидание устройства ^>-------------------------      *
+ECHO *      ------------------------^< РѕР¶РёРґР°РЅРёРµ СѓСЃС‚СЂРѕР№СЃС‚РІР° ^>-------------------------      *
 ECHO *                                                                                     *
-ECHO *            Если вы застряли на этом этапе - необходимо установить драйверы.            *
+ECHO *            Р•СЃР»Рё РІС‹ Р·Р°СЃС‚СЂСЏР»Рё РЅР° СЌС‚РѕРј СЌС‚Р°РїРµ - РЅРµРѕР±С…РѕРґРёРјРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РґСЂР°Р№РІРµСЂС‹.            *
 ECHO ***************************************************************************************
 ECHO.
 ECHO. ...
 ECHO.
 rem
 
-REM не используемая часть кода
+REM РЅРµ РёСЃРїРѕР»СЊР·СѓРµРјР°СЏ С‡Р°СЃС‚СЊ РєРѕРґР°
 :installcoremagisk
 cls
 Echo.
@@ -990,16 +990,16 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                      Вы точно уверены в патче ядра от А30
+ECHO.                      Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЏРґСЂР° РѕС‚ Рђ30
 ECHO.            
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto coremagiskB
 if /i "%choice%"=="2" goto STARTS
 echo.
@@ -1008,7 +1008,7 @@ REM
 
 :reboot0.1
 @cd/d "%~dp0files\"
-@IF EXIST "adb.exe" (cls) ELSE (cls & echo adb.exe нету рядом & pause & exit)
+@IF EXIST "adb.exe" (cls) ELSE (cls & echo adb.exe РЅРµС‚Сѓ СЂСЏРґРѕРј & pause & exit)
 ping -n 3 127.0.0.1>nul
 call :adb_check_devices
 @taskkill /im adb.exe /f >nul 2>&1
@@ -1021,9 +1021,9 @@ cls
 adb devices -l | findstr /ic:"device" >nul 2>&1
 if "%errorlevel%"=="1" (
 echo.%reboot1choise%  
-call :EchoColor "Не забудьте включить отладку по usb" Green & echo. & echo. & echo. & echo Телефон не подключён к компьютеру 
+call :EchoColor "РќРµ Р·Р°Р±СѓРґСЊС‚Рµ РІРєР»СЋС‡РёС‚СЊ РѕС‚Р»Р°РґРєСѓ РїРѕ usb" Green & echo. & echo. & echo. & echo РўРµР»РµС„РѕРЅ РЅРµ РїРѕРґРєР»СЋС‡С‘РЅ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ 
 echo. 
-echo Подключите телефон через кабель, программа сама увидит это
+echo РџРѕРґРєР»СЋС‡РёС‚Рµ С‚РµР»РµС„РѕРЅ С‡РµСЂРµР· РєР°Р±РµР»СЊ, РїСЂРѕРіСЂР°РјРјР° СЃР°РјР° СѓРІРёРґРёС‚ СЌС‚Рѕ
 echo. 
 ping -n 3 127.0.0.1>nul 
 goto reboot
@@ -1033,39 +1033,39 @@ Echo.
 CLS
 ECHO.
 ECHO. ======================================================================================
-ECHO. Чтобы включить/отключить окно с подключёнными устройствами введите "9", и нажмите Enter
-ECHO.           Убедитесь что драйвера установлены и включён режим отладки на телефоне 
-ECHO.                               Включите экран телефона 
-ECHO.                            Выберите как нужно перезагрузить
+ECHO. Р§С‚РѕР±С‹ РІРєР»СЋС‡РёС‚СЊ/РѕС‚РєР»СЋС‡РёС‚СЊ РѕРєРЅРѕ СЃ РїРѕРґРєР»СЋС‡С‘РЅРЅС‹РјРё СѓСЃС‚СЂРѕР№СЃС‚РІР°РјРё РІРІРµРґРёС‚Рµ "9", Рё РЅР°Р¶РјРёС‚Рµ Enter
+ECHO.           РЈР±РµРґРёС‚РµСЃСЊ С‡С‚Рѕ РґСЂР°Р№РІРµСЂР° СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹ Рё РІРєР»СЋС‡С‘РЅ СЂРµР¶РёРј РѕС‚Р»Р°РґРєРё РЅР° С‚РµР»РµС„РѕРЅРµ 
+ECHO.                               Р’РєР»СЋС‡РёС‚Рµ СЌРєСЂР°РЅ С‚РµР»РµС„РѕРЅР° 
+ECHO.                            Р’С‹Р±РµСЂРёС‚Рµ РєР°Рє РЅСѓР¶РЅРѕ РїРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ
 ECHO. ======================================================================================
-ECHO.                         1.Перезагрузить систему(Весь телефон)(adb)
+ECHO.                         1.РџРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ СЃРёСЃС‚РµРјСѓ(Р’РµСЃСЊ С‚РµР»РµС„РѕРЅ)(adb)
 ECHO.                                  
-ECHO.                         2.Перезагрузить в рекавери (adb)
+ECHO.                         2.РџРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ РІ СЂРµРєР°РІРµСЂРё (adb)
 ECHO.                                  
-ECHO.                         3.Выключить телефон (adb)
+ECHO.                         3.Р’С‹РєР»СЋС‡РёС‚СЊ С‚РµР»РµС„РѕРЅ (adb)
 ECHO.                                  
-ECHO.                         4.Назад
+ECHO.                         4.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
-if /i "%choice%"=="1" set "adbr=" & set "reboot1choise=Выбрана перезагрузка" & goto reboot1
-if /i "%choice%"=="2" set "adbr=recovery" & set "reboot1choise=Выбрана перезагрузка в рекавери" & goto reboot1
-if /i "%choice%"=="3" set "adbr=-p" & set "reboot1choise=Выбрано выключение" & goto reboot1
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
+if /i "%choice%"=="1" set "adbr=" & set "reboot1choise=Р’С‹Р±СЂР°РЅР° РїРµСЂРµР·Р°РіСЂСѓР·РєР°" & goto reboot1
+if /i "%choice%"=="2" set "adbr=recovery" & set "reboot1choise=Р’С‹Р±СЂР°РЅР° РїРµСЂРµР·Р°РіСЂСѓР·РєР° РІ СЂРµРєР°РІРµСЂРё" & goto reboot1
+if /i "%choice%"=="3" set "adbr=-p" & set "reboot1choise=Р’С‹Р±СЂР°РЅРѕ РІС‹РєР»СЋС‡РµРЅРёРµ" & goto reboot1
 if /i "%choice%"=="4" goto STARTS 
 if /i "%choice%"=="9" IF NOT EXIST "adb devices.cmd" (call :adb_check_devices) ELSE (taskkill.exe /fi "WINDOWTITLE eq adb devices" /f >nul 2>&1 & del /q /s %sniffer% >nul 2>&1)
 goto reboot
 echo.
 exit /b
 :reboot1
-IF EXIST "adb.exe" (cls) ELSE (echo adb.exe нету рядом & pause & exit)
+IF EXIST "adb.exe" (cls) ELSE (echo adb.exe РЅРµС‚Сѓ СЂСЏРґРѕРј & pause & exit)
 cls
 adb devices -l | findstr /ic:"device" >nul 2>&1
 if "%errorlevel%"=="1" (
 echo.%reboot1choise%  
-call :EchoColor "Не забудьте включить отладку по usb" Green & echo. & echo. & echo. & echo Телефон не подключён к компьютеру 
+call :EchoColor "РќРµ Р·Р°Р±СѓРґСЊС‚Рµ РІРєР»СЋС‡РёС‚СЊ РѕС‚Р»Р°РґРєСѓ РїРѕ usb" Green & echo. & echo. & echo. & echo РўРµР»РµС„РѕРЅ РЅРµ РїРѕРґРєР»СЋС‡С‘РЅ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ 
 echo. 
-echo Подключите телефон через кабель, программа сама увидит это
+echo РџРѕРґРєР»СЋС‡РёС‚Рµ С‚РµР»РµС„РѕРЅ С‡РµСЂРµР· РєР°Р±РµР»СЊ, РїСЂРѕРіСЂР°РјРјР° СЃР°РјР° СѓРІРёРґРёС‚ СЌС‚Рѕ
 echo. 
 ping -n 3 127.0.0.1>nul 
 goto reboot1
@@ -1079,12 +1079,12 @@ exit /b
 :reboot1V1
 set iddevices=.
 for  /f "tokens=4* delims= " %%i IN ('adb.exe devices -l') DO echo %%i>>device.txt
-echo Выберите модель по номеру:
+echo Р’С‹Р±РµСЂРёС‚Рµ РјРѕРґРµР»СЊ РїРѕ РЅРѕРјРµСЂСѓ:
 for /f "tokens=1* delims=:" %%i in ('more device.txt') do ^
 set/a c+=1 & set "v!c!=%%j" & set n=!n!!c!&echo !c!. %%j
 del /q /s "device.txt" >nul 2>&1
 >nul choice/n /c !n!
-echo Вы выбрали !v%errorlevel%!.
+echo Р’С‹ РІС‹Р±СЂР°Р»Рё !v%errorlevel%!.
 set "namephone=!v%errorlevel%!"
 if "%namephone%"=="" set "namephone=."
 >nul timeout 2&cls&set c=&set n=
@@ -1106,7 +1106,7 @@ echo ^title adb devices>>%sniffer%
 echo :1 >>%sniffer%
 echo ^mode con cols=48 lines=20>>%sniffer%
 echo cls >>%sniffer%
-echo echo Подключённые устройства к adb >>%sniffer%
+echo echo РџРѕРґРєР»СЋС‡С‘РЅРЅС‹Рµ СѓСЃС‚СЂРѕР№СЃС‚РІР° Рє adb >>%sniffer%
 echo echo. >>%sniffer%
 echo adb devices ^| findstr /ic:"device" >>%sniffer%
 echo tasklist.exe /fi "WINDOWTITLE eq Realme 8i - Utility" ^| findstr /ic:"cmd.exe" ^>nul 2>&1 >>%sniffer%
@@ -1125,32 +1125,32 @@ exit /b
 :dopolnit
 @cd/d "%~dp0files\"
 @taskkill /im adb.exe /f >nul 2>&1
-@IF EXIST "adb.exe" (cls) ELSE (cls & echo adb.exe нету рядом & pause & goto STARTS)
+@IF EXIST "adb.exe" (cls) ELSE (cls & echo adb.exe РЅРµС‚Сѓ СЂСЏРґРѕРј & pause & goto STARTS)
 cls
 Echo.
 CLS
-ECHO                              Несколько полезных советов!!
+ECHO                              РќРµСЃРєРѕР»СЊРєРѕ РїРѕР»РµР·РЅС‹С… СЃРѕРІРµС‚РѕРІ!!
 ECHO. =========================================================================================
-ECHO                          Не забудьте установить драйвера adb! 
-ECHO                               Включите отладку по USB
+ECHO                          РќРµ Р·Р°Р±СѓРґСЊС‚Рµ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РґСЂР°Р№РІРµСЂР° adb! 
+ECHO                               Р’РєР»СЋС‡РёС‚Рµ РѕС‚Р»Р°РґРєСѓ РїРѕ USB
 ECHO. =========================================================================================
-ECHO.                1.Установить приложение(ния) (adb)
+ECHO.                1.РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ(РЅРёСЏ) (adb)
 ECHO.                                  
-ECHO.                2.Сделать Бекап приложений и их данных / Восстановить (НЕ РАБОТАЕТ) (adb)
+ECHO.                2.РЎРґРµР»Р°С‚СЊ Р‘РµРєР°Рї РїСЂРёР»РѕР¶РµРЅРёР№ Рё РёС… РґР°РЅРЅС‹С… / Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ (РќР• Р РђР‘РћРўРђР•Рў) (adb)
 ECHO.                                  
-ECHO.                3.Дополнительно для прошивки
+ECHO.                3.Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ РґР»СЏ РїСЂРѕС€РёРІРєРё
 ECHO.                                  
-ECHO.                4.Заблокировать загрузчик (mtkclient)
+ECHO.                4.Р—Р°Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ Р·Р°РіСЂСѓР·С‡РёРє (mtkclient)
 ECHO.                       
-ECHO.                5.Включить/Отключить обновления(root) (adb)
+ECHO.                5.Р’РєР»СЋС‡РёС‚СЊ/РћС‚РєР»СЋС‡РёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёСЏ(root) (adb)
 ECHO.                                                    
-ECHO.                6.Убрать разрешение на подтверждение удаления(google photo) (adb)
+ECHO.                6.РЈР±СЂР°С‚СЊ СЂР°Р·СЂРµС€РµРЅРёРµ РЅР° РїРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ(google photo) (adb)
 ECHO.                                  
-ECHO.                9.Назад
+ECHO.                9.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto installapplication
 if /i "%choice%"=="2" goto dopolnit
 if /i "%choice%"=="3" goto Additionallyforfirmware
@@ -1165,9 +1165,9 @@ cls
 adb devices -l | findstr /ic:"device" >nul 2>&1
 if "%errorlevel%"=="1" (
 echo.%reboot1choise%  
-call :EchoColor "Не забудьте включить отладку по usb" Green & echo. & echo. & echo. & echo Телефон не подключён к компьютеру 
+call :EchoColor "РќРµ Р·Р°Р±СѓРґСЊС‚Рµ РІРєР»СЋС‡РёС‚СЊ РѕС‚Р»Р°РґРєСѓ РїРѕ usb" Green & echo. & echo. & echo. & echo РўРµР»РµС„РѕРЅ РЅРµ РїРѕРґРєР»СЋС‡С‘РЅ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ 
 echo. 
-echo Подключите телефон через кабель, программа сама увидит это
+echo РџРѕРґРєР»СЋС‡РёС‚Рµ С‚РµР»РµС„РѕРЅ С‡РµСЂРµР· РєР°Р±РµР»СЊ, РїСЂРѕРіСЂР°РјРјР° СЃР°РјР° СѓРІРёРґРёС‚ СЌС‚Рѕ
 echo. 
 ping -n 3 127.0.0.1>nul 
 goto deletegooglephoto
@@ -1175,17 +1175,17 @@ goto deletegooglephoto
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.         Вы точно хотите убрать разрешение на подтверждение удаления из google photo?
-ECHO.                 Это сработает если у вас google photo уже было в прошивке    
+ECHO.         Р’С‹ С‚РѕС‡РЅРѕ С…РѕС‚РёС‚Рµ СѓР±СЂР°С‚СЊ СЂР°Р·СЂРµС€РµРЅРёРµ РЅР° РїРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ РёР· google photo?
+ECHO.                 Р­С‚Рѕ СЃСЂР°Р±РѕС‚Р°РµС‚ РµСЃР»Рё Сѓ РІР°СЃ google photo СѓР¶Рµ Р±С‹Р»Рѕ РІ РїСЂРѕС€РёРІРєРµ    
 ECHO.                                
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto deletegooglephoto1
 if /i "%choice%"=="2" goto dopolnit
 goto deletegooglephoto
@@ -1194,9 +1194,9 @@ exit /b
 adb devices -l | findstr /ic:"device" >nul 2>&1
 if "%errorlevel%"=="1" (
 echo.%reboot1choise%  
-call :EchoColor "Не забудьте включить отладку по usb" Green & echo. & echo. & echo. & echo Телефон не подключён к компьютеру 
+call :EchoColor "РќРµ Р·Р°Р±СѓРґСЊС‚Рµ РІРєР»СЋС‡РёС‚СЊ РѕС‚Р»Р°РґРєСѓ РїРѕ usb" Green & echo. & echo. & echo. & echo РўРµР»РµС„РѕРЅ РЅРµ РїРѕРґРєР»СЋС‡С‘РЅ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ 
 echo. 
-echo Подключите телефон через кабель, программа сама увидит это
+echo РџРѕРґРєР»СЋС‡РёС‚Рµ С‚РµР»РµС„РѕРЅ С‡РµСЂРµР· РєР°Р±РµР»СЊ, РїСЂРѕРіСЂР°РјРјР° СЃР°РјР° СѓРІРёРґРёС‚ СЌС‚Рѕ
 echo. 
 ping -n 3 127.0.0.1>nul 
 goto deletegooglephoto1
@@ -1211,12 +1211,12 @@ exit /b
 set iddevices=.
 for  /f "tokens=4* delims= " %%i IN ('adb.exe devices -l') DO echo %%i>>device.txt
 cls
-echo Выберите модель по номеру:
+echo Р’С‹Р±РµСЂРёС‚Рµ РјРѕРґРµР»СЊ РїРѕ РЅРѕРјРµСЂСѓ:
 for /f "tokens=1* delims=:" %%i in ('more device.txt') do ^
 set/a c+=1 & set "v!c!=%%j" & set n=!n!!c!&echo !c!. %%j
 del /q /s "device.txt" >nul 2>&1
 >nul choice/n /c !n!
-echo Вы выбрали !v%errorlevel%!.
+echo Р’С‹ РІС‹Р±СЂР°Р»Рё !v%errorlevel%!.
 set "namephone=!v%errorlevel%!"
 if "%namephone%"=="" set "namephone=."
 >nul timeout 2&cls&set c=&set n=
@@ -1229,9 +1229,9 @@ exit /b
 cls
 adb devices -l | findstr /ic:"RMX3151" >nul 2>&1
 if "%errorlevel%"=="1" (
-call :EchoColor "Не забудьте включить отладку по usb" Green & echo. & echo. & echo. & echo realme 8i не подключён к компьютеру  
+call :EchoColor "РќРµ Р·Р°Р±СѓРґСЊС‚Рµ РІРєР»СЋС‡РёС‚СЊ РѕС‚Р»Р°РґРєСѓ РїРѕ usb" Green & echo. & echo. & echo. & echo realme 8i РЅРµ РїРѕРґРєР»СЋС‡С‘РЅ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ  
 echo. 
-echo Подключите телефон через кабель, программа сама увидит это
+echo РџРѕРґРєР»СЋС‡РёС‚Рµ С‚РµР»РµС„РѕРЅ С‡РµСЂРµР· РєР°Р±РµР»СЊ, РїСЂРѕРіСЂР°РјРјР° СЃР°РјР° СѓРІРёРґРёС‚ СЌС‚Рѕ
 echo. 
 ping -n 3 127.0.0.1>nul 
 goto start
@@ -1245,42 +1245,42 @@ if "0"=="%uid%" (set root=SuperSU & goto on/off update)
 for /f "delims=" %%a in ('adb -s %iddevices% shell "su 0 id -u" ^| findstr /ic:"Su"') do set uid=%%a & if "MagiskSU "=="!uid!" (set root=MagiskSU & goto on/off update)
 if not "."=="%root%" (
 cls 
-echo Root не обнаружен 
+echo Root РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅ 
 pause 
 exit
 )
 :on/off update
-echo подождите...
+echo РїРѕРґРѕР¶РґРёС‚Рµ...
 adb -s %iddevices% shell "pm list packages -d | grep 'sau'" | findstr /x /c:"package:com.oplus.sau" >nul 2>&1
-if %errorlevel% == 1 (set sau=Включён & set number1=1) else (set sau=Выключен & set number1=0)
+if %errorlevel% == 1 (set sau=Р’РєР»СЋС‡С‘РЅ & set number1=1) else (set sau=Р’С‹РєР»СЋС‡РµРЅ & set number1=0)
 adb -s %iddevices% shell "pm list packages -d | grep 'romupdate'" | findstr /x /c:"package:com.oplus.romupdate" >nul 2>&1
-if %errorlevel% == 1 (set romupdate=Включён & set number2=1) else (set romupdate=Выключен & set number2=0)
+if %errorlevel% == 1 (set romupdate=Р’РєР»СЋС‡С‘РЅ & set number2=1) else (set romupdate=Р’С‹РєР»СЋС‡РµРЅ & set number2=0)
 adb -s %iddevices% shell "pm list packages -d | grep 'ota'" | findstr /x /c:"package:com.oplus.ota" >nul 2>&1
-if %errorlevel% == 1 (set ota=Включён & set number3=1) else (set ota=Выключен & set number3=0)
+if %errorlevel% == 1 (set ota=Р’РєР»СЋС‡С‘РЅ & set number3=1) else (set ota=Р’С‹РєР»СЋС‡РµРЅ & set number3=0)
 set /a otvet=%number1%+%number2%+%number3%
-if %otvet% == 3 (set allupdate=Обновления включены & set color=Red) else (
-if %otvet% == 2 (set allupdate=Две службы обновления включены & set color=Red)
-if %otvet% == 1 (set allupdate=Одна служба обновления включена & set color=Red)
-if %otvet% == 0 (set allupdate=Обновления выключены & set color=Green)
+if %otvet% == 3 (set allupdate=РћР±РЅРѕРІР»РµРЅРёСЏ РІРєР»СЋС‡РµРЅС‹ & set color=Red) else (
+if %otvet% == 2 (set allupdate=Р”РІРµ СЃР»СѓР¶Р±С‹ РѕР±РЅРѕРІР»РµРЅРёСЏ РІРєР»СЋС‡РµРЅС‹ & set color=Red)
+if %otvet% == 1 (set allupdate=РћРґРЅР° СЃР»СѓР¶Р±Р° РѕР±РЅРѕРІР»РµРЅРёСЏ РІРєР»СЋС‡РµРЅР° & set color=Red)
+if %otvet% == 0 (set allupdate=РћР±РЅРѕРІР»РµРЅРёСЏ РІС‹РєР»СЋС‡РµРЅС‹ & set color=Green)
 )
 cls
-echo.У вас %root%
+echo.РЈ РІР°СЃ %root%
 echo.
-echo Примечание: 
-echo.1) При включении/отключении обновлений будет отправлен запрос root на телефон
-echo.2) Если у вас нечего не изменилось после отключения, то скорее всего рут права отклонены,
-echo    зайдите в управление и включите их для приложения "Оболочка" 
-echo                   Автор программы:En32
+echo РџСЂРёРјРµС‡Р°РЅРёРµ: 
+echo.1) РџСЂРё РІРєР»СЋС‡РµРЅРёРё/РѕС‚РєР»СЋС‡РµРЅРёРё РѕР±РЅРѕРІР»РµРЅРёР№ Р±СѓРґРµС‚ РѕС‚РїСЂР°РІР»РµРЅ Р·Р°РїСЂРѕСЃ root РЅР° С‚РµР»РµС„РѕРЅ
+echo.2) Р•СЃР»Рё Сѓ РІР°СЃ РЅРµС‡РµРіРѕ РЅРµ РёР·РјРµРЅРёР»РѕСЃСЊ РїРѕСЃР»Рµ РѕС‚РєР»СЋС‡РµРЅРёСЏ, С‚Рѕ СЃРєРѕСЂРµРµ РІСЃРµРіРѕ СЂСѓС‚ РїСЂР°РІР° РѕС‚РєР»РѕРЅРµРЅС‹,
+echo    Р·Р°Р№РґРёС‚Рµ РІ СѓРїСЂР°РІР»РµРЅРёРµ Рё РІРєР»СЋС‡РёС‚Рµ РёС… РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ "РћР±РѕР»РѕС‡РєР°" 
+echo                   РђРІС‚РѕСЂ РїСЂРѕРіСЂР°РјРјС‹:En32
 echo.
 echo.
 call :EchoColor "%allupdate%" %color% & echo.
 echo.
-echo 1) Включить обновления
-echo 2) Отключить обновления
-echo 3) Включить/Отключить выборочно службы
-echo 4) Обновить информацию
-echo 5) Назад
-choice /c 12345 /n /m "Введите цифру:"
+echo 1) Р’РєР»СЋС‡РёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёСЏ
+echo 2) РћС‚РєР»СЋС‡РёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёСЏ
+echo 3) Р’РєР»СЋС‡РёС‚СЊ/РћС‚РєР»СЋС‡РёС‚СЊ РІС‹Р±РѕСЂРѕС‡РЅРѕ СЃР»СѓР¶Р±С‹
+echo 4) РћР±РЅРѕРІРёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ
+echo 5) РќР°Р·Р°Рґ
+choice /c 12345 /n /m "Р’РІРµРґРёС‚Рµ С†РёС„СЂСѓ:"
 if errorlevel 5 goto dopolnit
 if errorlevel 4 goto on/off update
 if errorlevel 3 goto choiceupdate
@@ -1292,7 +1292,7 @@ adb -s %iddevices% shell "su -c pm disable com.oplus.sau" >nul 2>&1 && echo ok
 adb -s %iddevices% shell "su -c pm disable com.oplus.romupdate" >nul 2>&1 && echo ok
 adb -s %iddevices% shell "su -c pm disable com.oplus.ota" >nul 2>&1 && echo ok
 echo.
-echo обновления отключены
+echo РѕР±РЅРѕРІР»РµРЅРёСЏ РѕС‚РєР»СЋС‡РµРЅС‹
 ping -n 2 127.0.0.1>nul 
 goto on/off update
 exit /b
@@ -1302,41 +1302,41 @@ adb -s %iddevices% shell "su -c pm enable com.oplus.sau" >nul 2>&1 && echo ok
 adb -s %iddevices% shell "su -c pm enable com.oplus.romupdate" >nul 2>&1 && echo ok
 adb -s %iddevices% shell "su -c pm enable com.oplus.ota" >nul 2>&1 && echo ok
 echo.
-echo обновления включены
+echo РѕР±РЅРѕРІР»РµРЅРёСЏ РІРєР»СЋС‡РµРЅС‹
 ping -n 2 127.0.0.1>nul 
 goto on/off update
 exit /b
 :choiceupdate
 adb -s %iddevices% shell "pm list packages -d | grep 'sau'" | findstr /x /c:"package:com.oplus.sau" >nul 2>&1
-if %errorlevel% == 1 (set sau=Включён) else (set sau=Выключен)
+if %errorlevel% == 1 (set sau=Р’РєР»СЋС‡С‘РЅ) else (set sau=Р’С‹РєР»СЋС‡РµРЅ)
 adb -s %iddevices% shell "pm list packages -d | grep 'romupdate'" | findstr /x /c:"package:com.oplus.romupdate" >nul 2>&1
-if %errorlevel% == 1 (set romupdate=Включён) else (set romupdate=Выключен)
+if %errorlevel% == 1 (set romupdate=Р’РєР»СЋС‡С‘РЅ) else (set romupdate=Р’С‹РєР»СЋС‡РµРЅ)
 adb -s %iddevices% shell "pm list packages -d | grep 'ota'" | findstr /x /c:"package:com.oplus.ota" >nul 2>&1
-if %errorlevel% == 1 (set ota=Включён) else (set ota=Выключен)
+if %errorlevel% == 1 (set ota=Р’РєР»СЋС‡С‘РЅ) else (set ota=Р’С‹РєР»СЋС‡РµРЅ)
 cls
-echo Если все параметры включены то обновления включены.
-echo Если все параметры выключены то обновления выключены.
+echo Р•СЃР»Рё РІСЃРµ РїР°СЂР°РјРµС‚СЂС‹ РІРєР»СЋС‡РµРЅС‹ С‚Рѕ РѕР±РЅРѕРІР»РµРЅРёСЏ РІРєР»СЋС‡РµРЅС‹.
+echo Р•СЃР»Рё РІСЃРµ РїР°СЂР°РјРµС‚СЂС‹ РІС‹РєР»СЋС‡РµРЅС‹ С‚Рѕ РѕР±РЅРѕРІР»РµРЅРёСЏ РІС‹РєР»СЋС‡РµРЅС‹.
 echo.
-echo Включить/Отключить выборочно
-echo 1)Пакет com.oplus.sau - %sau%
-echo 2)Пакет com.oplus.romupdate - %romupdate%
-echo 3)Пакет com.oplus.ota - %ota%
-echo 4)Назад
-choice /c 1234 /n /m "Введите цифру:"
+echo Р’РєР»СЋС‡РёС‚СЊ/РћС‚РєР»СЋС‡РёС‚СЊ РІС‹Р±РѕСЂРѕС‡РЅРѕ
+echo 1)РџР°РєРµС‚ com.oplus.sau - %sau%
+echo 2)РџР°РєРµС‚ com.oplus.romupdate - %romupdate%
+echo 3)РџР°РєРµС‚ com.oplus.ota - %ota%
+echo 4)РќР°Р·Р°Рґ
+choice /c 1234 /n /m "Р’РІРµРґРёС‚Рµ С†РёС„СЂСѓ:"
 if "%errorlevel%" == "4" goto on/off update
-if "%errorlevel%" == "1" (if "Включён" == "%sau%" (
+if "%errorlevel%" == "1" (if "Р’РєР»СЋС‡С‘РЅ" == "%sau%" (
 adb -s %iddevices% shell "su -c pm disable com.oplus.sau" >nul 2>&1 & goto choiceupdate
 ) else (
 adb -s %iddevices% shell "su -c pm enable com.oplus.sau" >nul 2>&1 & goto choiceupdate
 ))
 
-if "%errorlevel%" == "2" (if "Включён" == "%romupdate%" (
+if "%errorlevel%" == "2" (if "Р’РєР»СЋС‡С‘РЅ" == "%romupdate%" (
 adb -s %iddevices% shell "su -c pm disable com.oplus.romupdate" >nul 2>&1 & goto choiceupdate
 ) else (
 adb -s %iddevices% shell "su -c pm enable com.oplus.romupdate" >nul 2>&1 & goto choiceupdate
 ))
 
-if "%errorlevel%" == "3" (if "Включён" == "%ota%" (
+if "%errorlevel%" == "3" (if "Р’РєР»СЋС‡С‘РЅ" == "%ota%" (
 adb -s %iddevices% shell "su -c pm disable com.oplus.ota" >nul 2>&1 & goto choiceupdate
 ) else (
 adb -s %iddevices% shell "su -c pm enable com.oplus.ota" >nul 2>&1 & goto choiceupdate
@@ -1349,16 +1349,16 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                   Вы точно хотите заблокировать загрузчик?
+ECHO.                   Р’С‹ С‚РѕС‡РЅРѕ С…РѕС‚РёС‚Рµ Р·Р°Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ Р·Р°РіСЂСѓР·С‡РёРє?
 ECHO.            
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto lock1
 if /i "%choice%"=="2" goto dopolnit
 goto lockseccfg
@@ -1366,13 +1366,13 @@ exit /b
 :lock1
 cls
 @cd/d "%Foldermtk%"
-Echo Зажмите на выключенном телефоне обе кнопки громкости
-Echo досчитайте до 5 и подключите его к компьютеру
-Echo после подключения досчитайте снова до 5 и отпустите кнопки
-Echo Скрипт вернёт вас в меню если блокировка загрузчика пройдёт удачно
+Echo Р—Р°Р¶РјРёС‚Рµ РЅР° РІС‹РєР»СЋС‡РµРЅРЅРѕРј С‚РµР»РµС„РѕРЅРµ РѕР±Рµ РєРЅРѕРїРєРё РіСЂРѕРјРєРѕСЃС‚Рё
+Echo РґРѕСЃС‡РёС‚Р°Р№С‚Рµ РґРѕ 5 Рё РїРѕРґРєР»СЋС‡РёС‚Рµ РµРіРѕ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ
+Echo РїРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґРѕСЃС‡РёС‚Р°Р№С‚Рµ СЃРЅРѕРІР° РґРѕ 5 Рё РѕС‚РїСѓСЃС‚РёС‚Рµ РєРЅРѕРїРєРё
+Echo РЎРєСЂРёРїС‚ РІРµСЂРЅС‘С‚ РІР°СЃ РІ РјРµРЅСЋ РµСЃР»Рё Р±Р»РѕРєРёСЂРѕРІРєР° Р·Р°РіСЂСѓР·С‡РёРєР° РїСЂРѕР№РґС‘С‚ СѓРґР°С‡РЅРѕ
 python mtk da seccfg lock >lock1.txt
 more "%Foldermtk%\lock1.txt" | findstr /ic:"Failed" > NUL
-if %errorlevel% EQU 0 set errorerrorfoldermtk=заблокировать загрузчика & goto errorfoldermtk
+if %errorlevel% EQU 0 set errorerrorfoldermtk=Р·Р°Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ Р·Р°РіСЂСѓР·С‡РёРєР° & goto errorfoldermtk
 del /q "lock1.txt"
 GOTO STARTS 
 exit /b
@@ -1387,25 +1387,25 @@ Echo.
 CLS
 ECHO.
 ECHO. ======================================================================================
-ECHO.                      В корне программы была создана папка application
-ECHO.       в неё можете положить apk файлы которые хотите установить в телефон 
-ECHO.          не обязательно класть приложения в папку, можно выбрать 3 или 4 пункт
-Echo.                       Выбирите одно из действий
+ECHO.                      Р’ РєРѕСЂРЅРµ РїСЂРѕРіСЂР°РјРјС‹ Р±С‹Р»Р° СЃРѕР·РґР°РЅР° РїР°РїРєР° application
+ECHO.       РІ РЅРµС‘ РјРѕР¶РµС‚Рµ РїРѕР»РѕР¶РёС‚СЊ apk С„Р°Р№Р»С‹ РєРѕС‚РѕСЂС‹Рµ С…РѕС‚РёС‚Рµ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РІ С‚РµР»РµС„РѕРЅ 
+ECHO.          РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РєР»Р°СЃС‚СЊ РїСЂРёР»РѕР¶РµРЅРёСЏ РІ РїР°РїРєСѓ, РјРѕР¶РЅРѕ РІС‹Р±СЂР°С‚СЊ 3 РёР»Рё 4 РїСѓРЅРєС‚
+Echo.                       Р’С‹Р±РёСЂРёС‚Рµ РѕРґРЅРѕ РёР· РґРµР№СЃС‚РІРёР№
 ECHO. ======================================================================================
-ECHO.                    1.Установить одно приложение
+ECHO.                    1.РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РѕРґРЅРѕ РїСЂРёР»РѕР¶РµРЅРёРµ
 ECHO.                                  
-ECHO.                    2.Установить все приложения из папки 
+ECHO.                    2.РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РІСЃРµ РїСЂРёР»РѕР¶РµРЅРёСЏ РёР· РїР°РїРєРё 
 ECHO.                                  
-ECHO.                    3.Выбрать приложение для установки
+ECHO.                    3.Р’С‹Р±СЂР°С‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё
 ECHO.                                  
-ECHO.                    4.Выбрать папку с приложениями для установки
-ECHO.                       (будут установленны все приложения из папки)      
+ECHO.                    4.Р’С‹Р±СЂР°С‚СЊ РїР°РїРєСѓ СЃ РїСЂРёР»РѕР¶РµРЅРёСЏРјРё РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё
+ECHO.                       (Р±СѓРґСѓС‚ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹ РІСЃРµ РїСЂРёР»РѕР¶РµРЅРёСЏ РёР· РїР°РїРєРё)      
 ECHO.                                        
-ECHO.                    5.Назад
+ECHO.                    5.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto installapplication1
 if /i "%choice%"=="2" goto installapplication2
 if /i "%choice%"=="3" goto installapplication3
@@ -1421,27 +1421,27 @@ cls
     Set "Str=123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
  
     Set /A Num=-1
-    Echo Выбирайте нужный файл: &Echo.
+    Echo Р’С‹Р±РёСЂР°Р№С‚Рµ РЅСѓР¶РЅС‹Р№ С„Р°Р№Р»: &Echo.
     For %%i In ("%FileIn%") Do (
         Call Set /A Num+=1
         Call Set "@@%%Num%%=%%i"
         Call :Checklist "%%i" %%Num%%
     )
-    If %Num% EQU -1 (Echo Файлы %FileIn% не найдены. &Pause &goto installapplication1.5)
+    If %Num% EQU -1 (Echo Р¤Р°Р№Р»С‹ %FileIn% РЅРµ РЅР°Р№РґРµРЅС‹. &Pause &goto installapplication1.5)
     Echo.
     Set /A Num+=1
     Call Set "Sele=%%Str:~0,%Num%%%"
-    Choice /N /C 0%Sele% /M "0-(нуль)- вернуться назад >"
+    Choice /N /C 0%Sele% /M "0-(РЅСѓР»СЊ)- РІРµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ >"
     Set /A Out=%ErrorLevel%
     If %Out% EQU 1 goto installapplication1.5
     Set /A Out-=2
     Call Set "Sele=%%@@%Out%%%" 
 Echo %Sele%
 cls
-Echo Включите экран телефона, а так-же отладку по usb
+Echo Р’РєР»СЋС‡РёС‚Рµ СЌРєСЂР°РЅ С‚РµР»РµС„РѕРЅР°, Р° С‚Р°Рє-Р¶Рµ РѕС‚Р»Р°РґРєСѓ РїРѕ usb
 %adb% install "%Sele%">Logfile.txt
 for  /f "tokens=*" %%j IN ('more Logfile.txt') DO set Logfile=%%j 
-if /I "%Logfile%" == "Success " (Echo. & Echo Приложение установленно & ping -n 3 127.0.0.1>nul )  else (Echo. & Echo Приложение НЕ установленно & ping -n 3 127.0.0.1>nul )
+if /I "%Logfile%" == "Success " (Echo. & Echo РџСЂРёР»РѕР¶РµРЅРёРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕ & ping -n 3 127.0.0.1>nul )  else (Echo. & Echo РџСЂРёР»РѕР¶РµРЅРёРµ РќР• СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕ & ping -n 3 127.0.0.1>nul )
 goto installapplication1.5
 cls
 Exit /B 0
@@ -1466,7 +1466,7 @@ exit /b
 :installapplication4
 cls
 for /f "usebackq delims=" %%i in (
-    `@"%systemroot%\system32\mshta.exe" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Выберите папку',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
+    `@"%systemroot%\system32\mshta.exe" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Р’С‹Р±РµСЂРёС‚Рµ РїР°РїРєСѓ',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
     1^|more`
 ) do set sFolderName=%%i
 if defined sFolderName (
@@ -1488,17 +1488,17 @@ Echo.
 CLS
 ECHO.
 ECHO. ======================================================================================
-Echo.                         Выбирите одно из действий
+Echo.                         Р’С‹Р±РёСЂРёС‚Рµ РѕРґРЅРѕ РёР· РґРµР№СЃС‚РІРёР№
 ECHO. ======================================================================================
-ECHO.                             1.Создать Бекап приложений и их данных 
+ECHO.                             1.РЎРѕР·РґР°С‚СЊ Р‘РµРєР°Рї РїСЂРёР»РѕР¶РµРЅРёР№ Рё РёС… РґР°РЅРЅС‹С… 
 ECHO.                                  
-ECHO.                             2.Восстановить бекап приложений и их данных 
+ECHO.                             2.Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ Р±РµРєР°Рї РїСЂРёР»РѕР¶РµРЅРёР№ Рё РёС… РґР°РЅРЅС‹С… 
 ECHO.                                  
-ECHO.                             9.Назад
+ECHO.                             9.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto createbackup
 if /i "%choice%"=="2" goto recoverbackup
 if /i "%choice%"=="9" goto dopolnit
@@ -1506,10 +1506,10 @@ goto backupappanddata
 echo.
 exit /b
 :createbackup
-Echo Включите экран телефона
+Echo Р’РєР»СЋС‡РёС‚Рµ СЌРєСЂР°РЅ С‚РµР»РµС„РѕРЅР°
 adb backup "-all -apk -nosystem" -f backup3.ab>Logfile.txt
 for  /f "tokens=*" %%j IN ('more Logfile.txt') DO set Logfile=%%j 
-if /I "%Logfile%" == "* daemon started successfully * " (Echo. & Echo Приложение установленно & ping -n 3 127.0.0.1>nul )  else (Echo. & Echo Приложение НЕ установленно & ping -n 3 127.0.0.1>nul )
+if /I "%Logfile%" == "* daemon started successfully * " (Echo. & Echo РџСЂРёР»РѕР¶РµРЅРёРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕ & ping -n 3 127.0.0.1>nul )  else (Echo. & Echo РџСЂРёР»РѕР¶РµРЅРёРµ РќР• СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕ & ping -n 3 127.0.0.1>nul )
 goto backupappanddata
 exit /b
 :recovery
@@ -1522,19 +1522,19 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                            Хотите выбрать файл рекавери?
-ECHO.            Или вы можете нажать нет и выбрать уже скаченное рекавери
+ECHO.                            РҐРѕС‚РёС‚Рµ РІС‹Р±СЂР°С‚СЊ С„Р°Р№Р» СЂРµРєР°РІРµСЂРё?
+ECHO.            РР»Рё РІС‹ РјРѕР¶РµС‚Рµ РЅР°Р¶Р°С‚СЊ РЅРµС‚ Рё РІС‹Р±СЂР°С‚СЊ СѓР¶Рµ СЃРєР°С‡РµРЅРЅРѕРµ СЂРµРєР°РІРµСЂРё
 ECHO.  
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO.                                  
-ECHO.                             3.Назад
+ECHO.                             3.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto recovery1
 if /i "%choice%"=="2" goto norecovery
 if /i "%choice%"=="3" goto viboor recovery ili coremagiskB2
@@ -1552,17 +1552,17 @@ CLS
 cls
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче рекавери ?
-ECHO.                      Название рекавери точно совпадает ?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЂРµРєР°РІРµСЂРё ?
+ECHO.                      РќР°Р·РІР°РЅРёРµ СЂРµРєР°РІРµСЂРё С‚РѕС‡РЅРѕ СЃРѕРІРїР°РґР°РµС‚ ?
 ECHO.  %wayfilerecovery%
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto recovery2
 if /i "%choice%"=="2" goto recovery
 goto recovery1.5
@@ -1571,13 +1571,13 @@ exit /b
 cls
 copy "%wayfilerecovery%" "%Foldermtk%" > NUL
 @cd/d "%Foldermtk%"
-Echo Зажмите на выключенном телефоне обе кнопки громкости
-Echo досчитайте до 5 и подключите его к компьютеру
-Echo после подключения досчитайте снова до 5 и отпустите кнопки
-Echo Скрипт вернёт вас в меню если прошивка рекавери пройдёт удачно
+Echo Р—Р°Р¶РјРёС‚Рµ РЅР° РІС‹РєР»СЋС‡РµРЅРЅРѕРј С‚РµР»РµС„РѕРЅРµ РѕР±Рµ РєРЅРѕРїРєРё РіСЂРѕРјРєРѕСЃС‚Рё
+Echo РґРѕСЃС‡РёС‚Р°Р№С‚Рµ РґРѕ 5 Рё РїРѕРґРєР»СЋС‡РёС‚Рµ РµРіРѕ Рє РєРѕРјРїСЊСЋС‚РµСЂСѓ
+Echo РїРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґРѕСЃС‡РёС‚Р°Р№С‚Рµ СЃРЅРѕРІР° РґРѕ 5 Рё РѕС‚РїСѓСЃС‚РёС‚Рµ РєРЅРѕРїРєРё
+Echo РЎРєСЂРёРїС‚ РІРµСЂРЅС‘С‚ РІР°СЃ РІ РјРµРЅСЋ РµСЃР»Рё РїСЂРѕС€РёРІРєР° СЂРµРєР°РІРµСЂРё РїСЂРѕР№РґС‘С‚ СѓРґР°С‡РЅРѕ
 python mtk w recovery "%filerecovery%" >errorflashrecovery.txt
 more "%Foldermtk%\errorflashrecovery.txt" | findstr /ic:"Failed" > NUL
-if %errorlevel% EQU 0 set errorerrorfoldermtk=прошивки рекавери & goto errorfoldermtk
+if %errorlevel% EQU 0 set errorerrorfoldermtk=РїСЂРѕС€РёРІРєРё СЂРµРєР°РІРµСЂРё & goto errorfoldermtk
 del /q "errorflashrecovery.txt"
 GOTO STARTS 
 exit /b 
@@ -1586,18 +1586,18 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                     
-ECHO.                           Выберите recovery 
+ECHO.                           Р’С‹Р±РµСЂРёС‚Рµ recovery 
 ECHO.            
 ECHO. ======================================================================================
 ECHO.                             1.TWRP                    
 ECHO.                                  
 ECHO.                             2.OrangeFox                     
 ECHO.                                  
-ECHO.                             9.Назад
+ECHO.                             9.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto fleshTWRP
 if /i "%choice%"=="2" goto fleshOrangeFox
 if /i "%choice%"=="9" goto recovery
@@ -1609,16 +1609,16 @@ set wayfilerecovery=%~dp0files\twrp.img
 set filerecovery=twrp.img
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче рекавери ?
-ECHO.                        Вы хотите прошить TWRP?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЂРµРєР°РІРµСЂРё ?
+ECHO.                        Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ TWRP?
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto recovery2
 if /i "%choice%"=="2" goto recovery
 echo.
@@ -1629,25 +1629,25 @@ set wayfilerecovery=%~dp0files\OrangeFox.img
 set filerecovery=OrangeFox.img
 ECHO.
 ECHO. ======================================================================================
-ECHO.                       Вы точно уверены в патче рекавери ?
-ECHO.                        Вы хотите прошить OrangeFox?
+ECHO.                       Р’С‹ С‚РѕС‡РЅРѕ СѓРІРµСЂРµРЅС‹ РІ РїР°С‚С‡Рµ СЂРµРєР°РІРµСЂРё ?
+ECHO.                        Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРѕС€РёС‚СЊ OrangeFox?
 ECHO. ======================================================================================
-ECHO.                             1.Да
+ECHO.                             1.Р”Р°
 ECHO.                                  
-ECHO.                             2.Нет
+ECHO.                             2.РќРµС‚
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto recovery2
 if /i "%choice%"=="2" goto recovery
 echo.
 exit /b
 
-REM Пока не реализовано
+REM РџРѕРєР° РЅРµ СЂРµР°Р»РёР·РѕРІР°РЅРѕ
 :miltizadacha
 cls
-Echo Эта функция не работает :(
+Echo Р­С‚Р° С„СѓРЅРєС†РёСЏ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ :(
 pause
 goto STARTS
 exit /b
@@ -1655,18 +1655,18 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                    
-ECHO.                      Вы хотите рут с тврп или без него
+ECHO.                      Р’С‹ С…РѕС‚РёС‚Рµ СЂСѓС‚ СЃ С‚РІСЂРї РёР»Рё Р±РµР· РЅРµРіРѕ
 ECHO.            
 ECHO. ======================================================================================
-ECHO.                             1.С TWRP    
+ECHO.                             1.РЎ TWRP    
 ECHO.                                  
-ECHO.                             2.без TWRP   (рекомендуется)
+ECHO.                             2.Р±РµР· TWRP   (СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ)
 ECHO.                                  
-ECHO.                             9.Назад
+ECHO.                             9.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto yestwrt
 if /i "%choice%"=="2" goto notwrp
 if /i "%choice%"=="9" goto STARTS
@@ -1677,7 +1677,7 @@ CLS
 ECHO.
 ECHO. ======================================================================================
 ECHO.                    
-ECHO.                         Какая у вас версия прошивки?
+ECHO.                         РљР°РєР°СЏ Сѓ РІР°СЃ РІРµСЂСЃРёСЏ РїСЂРѕС€РёРІРєРё?
 ECHO.            
 ECHO. ======================================================================================
 ECHO.                             1.A30    
@@ -1688,11 +1688,11 @@ ECHO.                             3.A20
 ECHO.                                 
 ECHO.                             4.A21
 ECHO.                               
-ECHO.                             9.Назад
+ECHO.                             9.РќР°Р·Р°Рґ
 ECHO. ======================================================================================
 :CHO
 set choice=
-set /p choice=Выберите действие, а затем нажмите Enter:
+set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 if /i "%choice%"=="1" goto miltizadachaA30
 if /i "%choice%"=="2" goto miltizadachaA32
 if /i "%choice%"=="3" goto miltizadachaA20
@@ -1705,9 +1705,9 @@ REM .
 :errorfoldermtk
 cls
 @cd/d "%Foldermtk%"
-Echo Ошибка %errorerrorfoldermtk%
-Echo Возможно у вас плохой кабель, который не передаёт информацию 
-Echo Или вы прошиваете не то что нужно!
+Echo РћС€РёР±РєР° %errorerrorfoldermtk%
+Echo Р’РѕР·РјРѕР¶РЅРѕ Сѓ РІР°СЃ РїР»РѕС…РѕР№ РєР°Р±РµР»СЊ, РєРѕС‚РѕСЂС‹Р№ РЅРµ РїРµСЂРµРґР°С‘С‚ РёРЅС„РѕСЂРјР°С†РёСЋ 
+Echo РР»Рё РІС‹ РїСЂРѕС€РёРІР°РµС‚Рµ РЅРµ С‚Рѕ С‡С‚Рѕ РЅСѓР¶РЅРѕ!
  pause & GOTO STARTS 
 exit /b
 REM >errordamp.txt
@@ -1717,23 +1717,23 @@ REM if %errorlevel% EQU 0 goto errorfoldermtk
 :Additionallyforfirmware
 explorer "%~dp0files\Additionally for firmware"
 goto dopolnit
-REM пока хз может что-нибудь лучше придумаю
+REM РїРѕРєР° С…Р· РјРѕР¶РµС‚ С‡С‚Рѕ-РЅРёР±СѓРґСЊ Р»СѓС‡С€Рµ РїСЂРёРґСѓРјР°СЋ
 REM CLS
 REM ECHO.
 REM ECHO. ======================================================================================
 REM ECHO.                    
-REM ECHO.                        Дополнительные файлы для прошивки
+REM ECHO.                        Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ С„Р°Р№Р»С‹ РґР»СЏ РїСЂРѕС€РёРІРєРё
 REM ECHO.            
 REM ECHO. ======================================================================================
-REM ECHO.                             1.Отключение меню подтверждения входа в систему    
+REM ECHO.                             1.РћС‚РєР»СЋС‡РµРЅРёРµ РјРµРЅСЋ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РІС…РѕРґР° РІ СЃРёСЃС‚РµРјСѓ    
 REM ECHO.                                  
-REM ECHO.                             2.Просто мод на чтение/запись системных разделов
+REM ECHO.                             2.РџСЂРѕСЃС‚Рѕ РјРѕРґ РЅР° С‡С‚РµРЅРёРµ/Р·Р°РїРёСЃСЊ СЃРёСЃС‚РµРјРЅС‹С… СЂР°Р·РґРµР»РѕРІ
 REM ECHO.                               
-REM ECHO.                             9.Назад
+REM ECHO.                             9.РќР°Р·Р°Рґ
 REM ECHO. ======================================================================================
 REM :CHO
 REM set choice=
-REM set /p choice=Выберите действие, а затем нажмите Enter:
+REM set /p choice=Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ, Р° Р·Р°С‚РµРј РЅР°Р¶РјРёС‚Рµ Enter:
 REM if /i "%choice%"=="1" goto miltizadachaA30
 REM if /i "%choice%"=="2" goto miltizadachaA32
 REM if /i "%choice%"=="3" goto miltizadachaA20
@@ -1743,23 +1743,23 @@ REM echo.
 REM exit /b
 :errorstarts
 cls
-Echo Эта функция пока что не работает :(
+Echo Р­С‚Р° С„СѓРЅРєС†РёСЏ РїРѕРєР° С‡С‚Рѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ :(
 pause
 goto STARTS
 exit /b
 :errorviewcoreerror
 cls
-Echo Вы согласились что это ядро вы не будете использовать, но если захотели, 
-Echo то скачайте полную версию программы
+Echo Р’С‹ СЃРѕРіР»Р°СЃРёР»РёСЃСЊ С‡С‚Рѕ СЌС‚Рѕ СЏРґСЂРѕ РІС‹ РЅРµ Р±СѓРґРµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ, РЅРѕ РµСЃР»Рё Р·Р°С…РѕС‚РµР»Рё, 
+Echo С‚Рѕ СЃРєР°С‡Р°Р№С‚Рµ РїРѕР»РЅСѓСЋ РІРµСЂСЃРёСЋ РїСЂРѕРіСЂР°РјРјС‹
 pause
 goto nocore
 exit /b
 :errorsetting
 cls
-Echo Эта функция отключена
-Echo Из-за настроеек
+Echo Р­С‚Р° С„СѓРЅРєС†РёСЏ РѕС‚РєР»СЋС‡РµРЅР°
+Echo РР·-Р·Р° РЅР°СЃС‚СЂРѕРµРµРє
 Echo.
-Echo Нажмите любую кнопку чтобы вернуться назад
+Echo РќР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєРЅРѕРїРєСѓ С‡С‚РѕР±С‹ РІРµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ
 pause>nul
 goto STARTS
 exit /b
