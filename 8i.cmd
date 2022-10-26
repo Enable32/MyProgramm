@@ -27,8 +27,8 @@
 @%color%
 @%modcon%
 @cd/d "%~dp0"
-@set Thisversion=5.9.9
-REM 5.9.9
+@set Thisversion=6.0.0
+REM 6.0.0
 
 :1
 @mode con cols=101 lines=10
@@ -58,6 +58,7 @@ call :EchoColor "                            Вы используете ста�
 call :EchoColor "                                 Актуальная версия - %Version%" Green & echo.
 echo. 
 call :EchoColor "                                       История изменений:" Green & echo. 
+call :EchoColor "6.0.0 Исправил ссылки на скачивания" Red & echo. 
 call :EchoColor "5.9.9 Добавил проверку на версию телефона 1783строк" Red & echo.  
 call :EchoColor "5.9.8 Добавлено автообновление и все прилигающие к нему пункты,максимально сжал код 1773строк" Red & echo.  
 call :EchoColor "5.8.2-5.9.7 Добавленна автоустановка драйверов 1349строк" Red & echo.   
@@ -249,11 +250,11 @@ call :32Python
 exit /b
 :64Python
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python,)
+powershell Start-BitsTransfer -source "https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python,)
 exit /b
 :32Python
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python,)
+powershell Start-BitsTransfer -source "https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python,)
 exit /b
 :downloadGit
 if /i %bitdepth%==x64 	(
@@ -264,11 +265,11 @@ call :32Git
 exit /b
 :64Git
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git,)
+powershell Start-BitsTransfer -source "https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git,)
 exit /b
 :32Git
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git,)
+powershell Start-BitsTransfer -source "https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git,)
 exit /b
 :downloadUsbDK
 if /i %bitdepth%==x64 	(
@@ -279,11 +280,11 @@ call :32UsbDK
 exit /b
 :64UsbDK
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
+powershell Start-BitsTransfer -source "https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
 exit /b
 :32UsbDK
 md "downloadFile" >nul 2>&1	
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
+powershell Start-BitsTransfer -source "https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk.)
 exit /b
 :mtkpereizbranie
 for  /f "delims=" %%i IN ('more "%~dp0files\temp\mtkfolder.txt"') DO set Foldermtk=%%i
@@ -407,7 +408,7 @@ Echo.3)Назад
 Echo.
 set choice=
 set /p choice=Ваш выбор:
-if /i "%choice%"=="2" start "" "1https://youtu.be/5VMi5zI--6g" & GOTO %whomenu% 
+if /i "%choice%"=="2" start "" "https://youtu.be/5VMi5zI--6g" & GOTO %whomenu% 
 if /i "%choice%"=="3" goto %whomenu% 
 if /i "%choice%"=="1" goto versiaproshiwki1
 GOTO versiaproshiwki
@@ -795,7 +796,7 @@ del /q "unlock1.txt"
 GOTO STARTS 
 exit /b 
 :Blog
-start "" "1https://4pda.to/forum/index.php?showtopic=1046142&view=findpost&p=114440082q1"
+start "" "https://4pda.to/forum/index.php?showtopic=1046142&view=findpost&p=114440082q1"
 GOTO STARTS 
 exit /b 
 
@@ -885,7 +886,7 @@ echo @TITLE installmtkclient>>%nameinstallmtkclient%
 echo @cd/d "%%~dp0" >>%nameinstallmtkclient%
 echo @chcp 1251 ^>nul >>%nameinstallmtkclient%
 echo echo Идёт скачивание mtkclient подождите немного >>%nameinstallmtkclient%
-echo git clone "1https://github.com/bkerler/mtkclient" "%%1" ^>nul >>%nameinstallmtkclient%
+echo git clone "https://github.com/bkerler/mtkclient" "%%1" ^>nul >>%nameinstallmtkclient%
 echo del "%%~0" ^& exit >>%nameinstallmtkclient%
 powershell.exe -noprofile "Start-Process '%nameinstallmtkclient%' '%mtkinstallfolder%mtkclient' -WindowStyle Maximized -Verb RunAs">nul 2>&1
 if /I "%errorlevel%"=="1" (goto errormtkclient)
@@ -928,13 +929,13 @@ cls
 Echo Идёт скачивание python подождите немного
 @cd/d "%~dp0"
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
 Echo.
 Echo Идёт скачивание GIT подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
 Echo.
 Echo Идёт скачивание UsbDK подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok   || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x64.msi" -destination "downloadFile" >nul 2>&1 && Echo Ok   || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
 Echo.
 cls
 call :%errorAll%
@@ -944,13 +945,13 @@ cls
 Echo Идёт скачивание python подождите немного
 @cd/d "%~dp0"
 md "downloadFile" >nul 2>&1
-powershell Start-BitsTransfer -source "1https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "https://www.python.org/ftp/python/3.9.8/python-3.9.8.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok || (Echo.Error & set errorpython=ошибка скачивания python & set errorAll=errorAll & set errornamepython=python, & Echo python>>.\files\temp\error.txt)
 Echo.
 Echo Идёт скачивание GIT подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe" -destination "downloadFile" >nul 2>&1 && Echo Ok  || (Echo.Error & set errorGit=ошибка скачивания Git & set errorAll=errorAll & set errornameGit=Git, & Echo Git>>.\files\temp\error.txt)
 Echo.
 Echo Идёт скачивание UsbDK подождите немного
-powershell Start-BitsTransfer -source "1https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
+powershell Start-BitsTransfer -source "https://github.com/daynix/UsbDk/releases/download/v1.00-22/UsbDk_1.0.22_x86.msi" -destination "downloadFile"  >nul 2>&1 && Echo Ok  || (Echo.Error & set errorUsbDk=ошибка скачивания UsbDk & set errorAll=errorAll & set errornameusbdk=UsbDk. & Echo UsbDk>>.\files\temp\error.txt)
 cls
 call :%errorAll%
 exit /b
