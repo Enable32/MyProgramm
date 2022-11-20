@@ -45,20 +45,21 @@ goto continuation
 REM Проверка обновлений программы
 :CheckUpdate
 cls
-curl -g -k -L -# -o "%temp%\Version.bat" "https://pastebin.com/raw/KFtskTJR" >nul 2>&1
+color 07
+curl -g -k -L -# -o "%~dp0files\temp\Version.bat" "https://pastebin.com/raw/KFtskTJR" >nul 2>&1
 call "%~dp0files\temp\Version.bat"
 del /q "%~dp0files\temp\Version.bat" >nul 2>&1 
 if "%Thisversion%" lss "%Version%" (goto Update) else (goto continuation)
 REM Обновление программы
 :Update
 @color 0
-@mode con cols=97 lines=17
+@mode con cols=97 lines=19
 cls
 call :EchoColor "                            Вы используете старую версию - %Thisversion%" red & echo.
 call :EchoColor "                                 Актуальная версия - %Version%" Green & echo.
 echo. 
 call :EchoColor "                                       История изменений:" Green & echo. 
-call :EchoColor "Мелкие правки,сжатие кода 1784строк" Red & echo. 
+call :EchoColor "6.0.1 Мелкие правки,сжатие кода 1784строк" Red & echo. 
 call :EchoColor "6.0.0 Исправил ссылки на скачивания 1784строк" Red & echo. 
 call :EchoColor "5.9.9 Добавил проверку на версию телефона 1783строк" Red & echo.  
 call :EchoColor "5.9.8 Добавлено автообновление и все прилигающие к нему пункты,максимально сжал код 1773строк" Red & echo.  
