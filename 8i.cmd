@@ -14,40 +14,40 @@
 @set dialog=%dialog%('Scripting.FileSystemObject').GetStandardStream(1).WriteLine(FILE.value);
 @set dialog=%dialog%close();resizeTo(0,0);</script>"
 @set don'tusemtkclient=0
-@set adb="%~dp0\files\adb.exe"
+@set adb="%~dp0files\adb.exe"
 @set logfile=.
 @set "phoneversiondisplay=echo."
 @set fileapk=.
 @set "adbr=."
 @set "namephone=."
-@taskkill /im adb.exe /f >nul 2>&1
+@set errortxt="%~dp0files\temp\error.txt"
+@taskkill.exe /im adb.exe /f >nul 2>&1
 @taskkill.exe /fi "WINDOWTITLE eq adb devices" /f >nul 2>&1
 @set "modcon=mode con cols=93 lines=35"
 @set "color=color 17"
 @%color%
 @%modcon%
 @cd/d "%~dp0"
-@set Thisversion=6.0.0
-REM 6.0.0
+@set Thisversion=6.0.1
+REM 6.0.1
 
 :1
-@mode con cols=101 lines=10
-@color 07
 REM Проверяем интернет-соединение
 ping www.google.nl -n 1 -w 100 |>nul find /i "TTL=" && goto CheckUpdate
+@color 07
 call :EchoColor "                  Невозможно проверить обновления программы, отсутствует интернет" Red & echo.     
 echo.
 call :EchoColor "   Использование старых версий не рекомендуется, поэтому при первой возможности обновите программу" Red & echo.   
 echo.
+@mode con cols=101 lines=10
 pause
 goto continuation
 REM Проверка обновлений программы
 :CheckUpdate
 cls
-@mode con cols=72 lines=10
 curl -g -k -L -# -o "%temp%\Version.bat" "https://pastebin.com/raw/KFtskTJR" >nul 2>&1
-call "%temp%\Version.bat"
-del /q /s "%temp%\Version.bat" >nul 2>&1 
+call "%~dp0files\temp\Version.bat"
+del /q "%~dp0files\temp\Version.bat" >nul 2>&1 
 if "%Thisversion%" lss "%Version%" (goto Update) else (goto continuation)
 REM Обновление программы
 :Update
@@ -58,6 +58,7 @@ call :EchoColor "                            Вы используете ста�
 call :EchoColor "                                 Актуальная версия - %Version%" Green & echo.
 echo. 
 call :EchoColor "                                       История изменений:" Green & echo. 
+call :EchoColor "Мелкие правки,сжатие кода 1784строк" Red & echo. 
 call :EchoColor "6.0.0 Исправил ссылки на скачивания 1784строк" Red & echo. 
 call :EchoColor "5.9.9 Добавил проверку на версию телефона 1783строк" Red & echo.  
 call :EchoColor "5.9.8 Добавлено автообновление и все прилигающие к нему пункты,максимально сжал код 1773строк" Red & echo.  
@@ -70,22 +71,22 @@ call :EchoColor "1.0.0-2.0.0 добавил проверку mtkclient(-а) 987�
 call :EchoColor "0.0.1 Создание программы 536строк" Red & echo.   
 echo. 
 call :EchoColor "               Нажмите любую клавишу, чтобы обновить программу" Blue & echo.                   
-del /q /s "%temp%\Version.bat" >nul 2>&1 
+del /q "%~dp0files\temp\Version.bat" >nul 2>&1 
 pause>nul
 REM goto update
 curl -g -k -L -# -o %0 "https://github.com/Enable32/MyProgramm/raw/main/8i-Инструменты.cmd" >nul 2>&1 & call %0
 exit
 
+:continuation
+@%modcon%
+@%color%
 rem Эта настройка нужна только для тех кто не хочет использовать mtkclient
 FOR /F "usebackq tokens=*" %%a IN (`more "setting.inf" ^| findstr /ic:"set don'tusemtkclient=1"`) DO (
 set don'tusemtkclient=1
 goto STARTS
 )
 
-:continuation
-@%modcon%
-@%color%
-echo on
+REM echo on
 IF EXIST "%~dp0files\temp\phoneversion.txt" (
 for %%a in (a.46 a.21 a.20 a.32) do (
 more "%~dp0files\temp\phoneversion.txt" | findstr /ic:"%%a" >nul 2>&1
@@ -163,13 +164,15 @@ exit /b
 exit /b
 :launch
 cls
-for  /f "tokens=1*" %%i IN ('more ".\files\temp\error.txt" ^| findstr /ic:"python"') DO set python=%%i
+if EXIST %errortxt% (
+for  /f "tokens=1*" %%i IN ('more %errortxt% ^| findstr /ic:"python"') DO set python=%%i
 if /I "%python%"=="python," (set launch2=:launch2)
-for  /f "tokens=1*" %%i IN ('more ".\files\temp\error.txt" ^| findstr /ic:"Git"') DO set Git=%%i
+for  /f "tokens=1*" %%i IN ('more %errortxt% ^| findstr /ic:"Git"') DO set Git=%%i
 if /I "%Git%"=="Git," (set launch2=:launch2)
-for  /f "tokens=1*" %%i IN ('more ".\files\temp\error.txt" ^| findstr /ic:"UsbDk"') DO set UsbDk=%%i
+for  /f "tokens=1*" %%i IN ('more %errortxt% ^| findstr /ic:"UsbDk"') DO set UsbDk=%%i
 if /I "%UsbDK%"=="UsbDK." (set launch2=:launch2)
 if /I "%launch2%"==":launch2" (call :%launch2%)
+)
 if EXIST "%~dp0files\temp\mtkfolder.txt" (goto mtkpereizbranie)
 goto launch2.5
 exit /B
@@ -289,8 +292,8 @@ exit /b
 :mtkpereizbranie
 for  /f "delims=" %%i IN ('more "%~dp0files\temp\mtkfolder.txt"') DO set Foldermtk=%%i
 if not EXIST "%Foldermtk%\setup.py" (
-del /s /q ."\files\temp\mtkfolder.txt"
-rd  /s /q "%~dp0files\temp\mtkfolder.txt"
+del /s /q ."\files\temp\mtkfolder.txt" >nul 2>&1
+rd  /s /q "%~dp0files\temp\mtkfolder.txt" >nul 2>&1
 goto papka
 )
 goto STARTS
@@ -317,41 +320,37 @@ if defined sFolderName (
 )
 for %%i in ("%sFolderName%") do set "name=%%~nxi"
 Echo %sFolderName%>"%~dp0files\temp\mtkfolder.txt"
-goto srawnenie
-exit/b 
-:srawnenie
 if /I "%name%."=="mtkclient." (goto mtkpereizbranie)  else (set "choicefoldersinstall=Выберите правильно папку: mtkclient" & goto papka1)  >nul 2>&1
-exit/b
+exit/b 
 :STARTS
 @echo off
 @%modcon%
 @cd/d "%~dp0"
-@taskkill /im adb.exe /f >nul 2>&1
+@taskkill.exe /im adb.exe /f >nul 2>&1
 @taskkill.exe /fi "WINDOWTITLE eq adb devices" /f >nul 2>&1
 @del /q /s %sniffer%
-@for  /f "delims=" %%i IN ('more "%~dp0files\temp\mtkfolder.txt"') DO set Foldermtk=%%i
+@for  /f "delims=" %%i IN ('more "%~dp0files\temp\mtkfolder.txt"') DO set Foldermtk=%%i & set "echoFolderMTK=Echo                       Папка с mtk: !Foldermtk!"
 @for  /f "delims=" %%i IN ('more "%~dp0files\temp\phoneversion.txt"') DO set phoneversion=%%i
 @For %%f In (%Foldermtk%) Do (Set "FileName=%%~nxf")
-@if /I "%don'tusemtkclient%"=="1" (set "Foldermtk=Отсутствует из-за настроек") else (
+@if /I "%don'tusemtkclient%"=="1" (set "Foldermtk=Отсутствует из-за настроек" & set echoFolderMTK=call :EchoColor "                      Папка с mtk:" white ^& call :EchoColor " !Foldermtk!" red ^& echo. )
 @if /I "%FileName%."=="mtkclient." (Echo.)  else (goto papka)  
-)
-@if /I "%phoneversion%."=="." (echo.)  else (set "phoneversiondisplay=call :EchoColor "                  Ваша версия телефона: %phoneversion%, если нет введите 202" Green & echo.")  
+@if /I "%phoneversion%."=="." (echo.)  else (set "phoneversiondisplay=call :EchoColor "                  Ваша версия телефона: %phoneversion%, если нет введите 202 ^(adb^)" Green & echo.")  
 @del /s /q ".\files\temp\error.txt"
 CLS
 ECHO                            Несколько полезных советов!!
 ECHO. ===========================================================================================
 Echo                          (adb)-использование программы adb
 Echo                     (mtkclient)-использование программы mtkclient
-ECHO                          Не забудьте установить драйвера! 
 REM ECHO. Чтобы получить полную справку как пользоваться этой программой впишите 100 и нажмите Enter
-ECHO.                 Чтобы узнать какая у вас версия прошивки введите 200 (adb)
-ECHO.                        Выбираем какой нужен скрипт и запускаем его
+call :EchoColor "               Чтобы узнать какая у вас версия прошивки введите 200 (adb)" DarkCyan & echo.
+ECHO.                         Не забудьте установить драйвера! 
+ECHO.                     Выбираем какой нужен скрипт и запускаем его
 Echo                            Отработка скрипта не видна    
 Echo                         Нужно ждать завершения выполнения
 Echo                      Скрипт вас вернёт в меню если всё будет ок
 Echo                         затем отключаем телефон от компа
 Echo                             Автор программы:En32
-Echo                       Папка с mtk: %Foldermtk%
+%echoFolderMTK%
 %phoneversiondisplay%
 ECHO. ===========================================================================================
 ECHO.              1.Сделать Бэкап (boot,vbmeta и т.д) (mtkclient)
@@ -386,7 +385,7 @@ if /i "%choice%"=="8" goto dopolnit
 if /i "%choice%"=="999" if /I "%don'tusemtkclient%"=="1" (goto errorsetting) else (del /s /q "%~dp0files\temp\mtkfolder.txt" & goto papka) 
 if /i "%choice%"=="100" goto errorstarts
 if /i "%choice%"=="200" set whomenu=starts & goto versiaproshiwki
-if /i "%choice%"=="202" goto errorstarts
+if /i "%choice%"=="202" set versiaproshiwki=starts & goto versiaproshiwki1
 if /i "%choice%"=="0" exit
 GOTO STARTS
 exit /b
@@ -394,6 +393,7 @@ exit /b
 
 exit /b
 :versiaproshiwki
+set versiaproshiwki=versiaproshiwki
 @cd/d "%~dp0"
 cls
 Echo Зайдите в звонилку набирите *#1234#, в конце вы увидите номер прошивки
@@ -431,7 +431,7 @@ adb shell getprop ro.build.display.id | findstr /ic:"%%a" >nul 2>&1
 if /i "!errorlevel!"=="0" set vershionphone2=%%a & set "vershionphone%%a=(рекомендуется)" && echo %%a>"%~dp0files\temp\phoneversion.txt"
 )
 set "nocoretext=Если напротив прошивки написано рекомендуется, то это означает что вы уже определяли версию"
-GOTO versiaproshiwki 
+GOTO %versiaproshiwki% 
 exit /b
 :damp
 cls
@@ -465,7 +465,7 @@ Echo Зажмите на выключенном телефоне обе кноп
 Echo досчитайте до 5 и подключите его к компьютеру
 Echo после подключения досчитайте снова до 5 и отпустите кнопки
 Echo Скрипт вернёт вас в меню если дамп пройдёт удачно
-del /q /s "boot.img" >nul 2>&1 
+del /q "boot.img" >nul 2>&1 
 python mtk r boot,vbmeta boot.img,vbmeta.img >nul 2>&1 
 cls
 if not EXIST "boot.img" (goto errorfoldermtk) >nul 2>&1 
@@ -483,9 +483,9 @@ Echo Зажмите на выключенном телефоне обе кноп
 Echo досчитайте до 5 и подключите его к компьютеру
 Echo после подключения досчитайте снова до 5 и отпустите кнопки
 Echo Скрипт вернёт вас в меню если дамп пройдёт удачно
-del /q /s "nvcfg.img" >nul 2>&1 
-del /q /s "nvdata.img" >nul 2>&1 
-del /q /s "nvram.img" >nul 2>&1 
+del /q "nvcfg.img" >nul 2>&1 
+del /q "nvdata.img" >nul 2>&1 
+del /q "nvram.img" >nul 2>&1 
 python mtk r nvram,nvdata,nvcfg nvram.img,nvdata.img,nvcfg.img >"errordamp.txt"
 if not EXIST "nvcfg.img" (goto errorfoldermtk) >nul 2>&1
 if not EXIST "nvdata.img" (goto errorfoldermtk) >nul 2>&1
@@ -649,7 +649,7 @@ ECHO.
 ECHO. ======================================================================================
 ECHO.                     
 ECHO.                      Выберите ядро для правильной прошивки
-ECHO.          Чтобы узнать как узнать номер прошивки введите 200 и нажмите Enter
+ECHO.          Чтобы узнать номер прошивки введите 200 и нажмите Enter
 ECHO. %nocoretext%
 ECHO. 
 ECHO. ======================================================================================
@@ -878,7 +878,7 @@ cls
 goto nextfoldermtkinstall2
 :next2
 cls
-del /q /s "%~dp0files\temp\mtkfolder.txt" >nul 2>&1
+del /q "%~dp0files\temp\mtkfolder.txt" >nul 2>&1
 Echo Идёт скачивание mtkclient подождите немного
 set nameinstallmtkclient="installmtkclient.cmd"
 echo @echo off>%nameinstallmtkclient%
@@ -1022,7 +1022,7 @@ REM
 @IF EXIST "adb.exe" (cls) ELSE (cls & echo adb.exe нету рядом & pause & exit)
 ping -n 3 127.0.0.1>nul
 call :adb_check_devices
-@taskkill /im adb.exe /f >nul 2>&1
+@taskkill.exe /im adb.exe /f >nul 2>&1
 @taskkill.exe /fi "WINDOWTITLE eq adb devices" /f >nul 2>&1
 ping -n 2 127.0.0.1>nul
 tasklist | findstr /ic:"adb.exe" >nul 2>&1 
@@ -1064,7 +1064,7 @@ if /i "%choice%"=="1" set "adbr=" & set "reboot1choise=Выбрана перез
 if /i "%choice%"=="2" set "adbr=recovery" & set "reboot1choise=Выбрана перезагрузка в рекавери" & goto reboot1
 if /i "%choice%"=="3" set "adbr=-p" & set "reboot1choise=Выбрано выключение" & goto reboot1
 if /i "%choice%"=="4" goto STARTS 
-if /i "%choice%"=="9" IF NOT EXIST "adb devices.cmd" (call :adb_check_devices) ELSE (taskkill.exe /fi "WINDOWTITLE eq adb devices" /f >nul 2>&1 & del /q /s %sniffer% >nul 2>&1)
+if /i "%choice%"=="9" IF NOT EXIST "adb devices.cmd" (call :adb_check_devices) ELSE (taskkill.exe.exe /fi "WINDOWTITLE eq adb devices" /f >nul 2>&1 & del /q /s %sniffer% >nul 2>&1)
 goto reboot
 echo.
 exit /b
@@ -1081,7 +1081,7 @@ echo.
 ping -n 3 127.0.0.1>nul 
 goto reboot1
 )
-del /q /s "device.txt" >nul 2>&1
+del /q "device.txt" >nul 2>&1
 for /f %%c in ('adb devices -l^|find/i /c "device"') do @if %%c==2 goto reboot1V1
 for  /f "tokens=1* delims= " %%i IN ('adb devices -l ^| findstr /ic:"device"') DO set iddevices=%%i
 adb -s %iddevices% shell reboot !adbr!
@@ -1093,7 +1093,7 @@ for  /f "tokens=4* delims= " %%i IN ('adb.exe devices -l') DO echo %%i>>device.t
 echo Выберите модель по номеру:
 for /f "tokens=1* delims=:" %%i in ('more device.txt') do ^
 set/a c+=1 & set "v!c!=%%j" & set n=!n!!c!&echo !c!. %%j
-del /q /s "device.txt" >nul 2>&1
+del /q "device.txt" >nul 2>&1
 >nul choice/n /c !n!
 echo Вы выбрали !v%errorlevel%!.
 set "namephone=!v%errorlevel%!"
@@ -1121,7 +1121,7 @@ echo echo Подключённые устройства к adb >>%sniffer%
 echo echo. >>%sniffer%
 echo adb devices ^| findstr /ic:"device" >>%sniffer%
 echo tasklist.exe /fi "WINDOWTITLE eq Realme 8i - Utility" ^| findstr /ic:"cmd.exe" ^>nul 2>&1 >>%sniffer%
-echo if /i "%%errorlevel%%"=="1" (del /q /s "adb devices.cmd" ^& exit)>>%sniffer%
+echo if /i "%%errorlevel%%"=="1" (del /q "adb devices.cmd" ^& exit)>>%sniffer%
 echo ping -n 4 127.0.0.1^>nul  >>%sniffer%
 echo goto 1 >>%sniffer%
 echo #^> >>%sniffer%
@@ -1135,7 +1135,7 @@ start "" %sniffer%
 exit /b
 :dopolnit
 @cd/d "%~dp0files\"
-@taskkill /im adb.exe /f >nul 2>&1
+@taskkill.exe /im adb.exe /f >nul 2>&1
 @IF EXIST "adb.exe" (cls) ELSE (cls & echo adb.exe нету рядом & pause & goto STARTS)
 cls
 Echo.
@@ -1212,7 +1212,7 @@ echo.
 ping -n 3 127.0.0.1>nul 
 goto deletegooglephoto1
 )
-del /q /s "device.txt" >nul 2>&1
+del /q "device.txt" >nul 2>&1
 for /f %%c in ('adb devices -l^|find/i /c "device"') do @if %%c==2 goto deletegooglephoto1V1
 for /f "tokens=1* delims= " %%i IN ('adb devices -l ^| findstr /ic:"device"') DO set iddevices=%%i
 adb -s %iddevices% shell "cmd role add-role-holder android.app.role.SYSTEM_GALLERY com.google.android.apps.photos"
@@ -1225,7 +1225,7 @@ cls
 echo Выберите модель по номеру:
 for /f "tokens=1* delims=:" %%i in ('more device.txt') do ^
 set/a c+=1 & set "v!c!=%%j" & set n=!n!!c!&echo !c!. %%j
-del /q /s "device.txt" >nul 2>&1
+del /q "device.txt" >nul 2>&1
 >nul choice/n /c !n!
 echo Вы выбрали !v%errorlevel%!.
 set "namephone=!v%errorlevel%!"
@@ -1391,7 +1391,7 @@ exit /b
 @cd/d "%~dp0"
 @md "%~dp0application" >nul 2>&1
 :installapplication1.5
-@taskkill /im adb.exe /f >nul 2>&1
+@taskkill.exe /im adb.exe /f >nul 2>&1
 @cd/d "%~dp0application"
 cls
 Echo.
@@ -1493,7 +1493,7 @@ goto installapplication4.1
 exit /b
 :backupappanddata
 @cd/d "%~dp0files\"
-@taskkill /im adb.exe /f >nul 2>&1
+@taskkill.exe /im adb.exe /f >nul 2>&1
 cls
 Echo.
 CLS
